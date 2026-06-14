@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MO | AI活用ポートフォリオ｜Claude Code 活用ライター</title>
+
+  <!-- SEO -->
+  <meta name="description" content="MO のAI活用ポートフォリオ。Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com で公開した16本のAI学習記事をまとめています。">
+  <meta name="author" content="MO">
+  <meta name="keywords" content="MO, Claude Code, AI, 生成AI, 自動化, note, ポートフォリオ, AIライター">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#0f0f14">
+  <link rel="canonical" href="https://masa0980-sudo.github.io/mo-portfolio/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/mo_avatar.png">
+  <link rel="apple-touch-icon" href="img/mo_avatar.png">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MO | AI活用ポートフォリオ">
+  <meta property="og:title" content="MO | AI活用ポートフォリオ｜Claude Code 活用ライター">
+  <meta property="og:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com で公開した16本のAI学習記事をまとめたポートフォリオ。">
+  <meta property="og:url" content="https://masa0980-sudo.github.io/mo-portfolio/">
+  <meta property="og:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MO | AI活用ポートフォリオ">
+  <meta name="twitter:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com の16記事をまとめたポートフォリオ。">
+  <meta name="twitter:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
+
+  <!-- 構造化データ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "MO",
+    "url": "https://masa0980-sudo.github.io/mo-portfolio/",
+    "image": "https://masa0980-sudo.github.io/mo-portfolio/img/mo_avatar.png",
+    "jobTitle": "Claude Code 活用ライター",
+    "description": "AIツールを活用したコンテンツ制作・業務自動化の実践者。",
+    "sameAs": ["https://note.com/mo0980"]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    /* アクセシビリティ：フォーカスリング */
+    a:focus-visible, button:focus-visible {
+      outline: 2px solid var(--accent2);
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* スクロール出現アニメーション */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .card { transition: none; }
+    }
+
+    :root {
+      --bg: #0f0f14;
+      --surface: #1a1a24;
+      --card: #1e1e2e;
+      --border: rgba(255,255,255,0.08);
+      --accent: #7c6bf7;
+      --accent2: #a78bfa;
+      --text: #e4e4f0;
+      --muted: #9090a8;
+      --tag-bg: rgba(124,107,247,0.15);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f0f14 0%, #1a0a3e 50%, #0a1a3e 100%);
+      padding: 80px 20px 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(124,107,247,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: var(--tag-bg);
+      border: 1px solid rgba(124,107,247,0.4);
+      color: var(--accent2);
+      font-size: 12px;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .hero h1 .name-text {
+      background: linear-gradient(135deg, #fff 30%, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-avatar {
+      width: 1.5em;
+      height: 1.5em;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,255,255,0.15);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .hero .subtitle {
+      color: var(--muted);
+      font-size: 15px;
+      margin-bottom: 24px;
+    }
+    .hero .bio {
+      max-width: 560px;
+      margin: 0 auto 32px;
+      color: #c0c0d8;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+    .stat {
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--accent2);
+      display: block;
+    }
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .section-count {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    @media (max-width: 900px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .grid { grid-template-columns: 1fr; } }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(124,107,247,0.2);
+      border-color: rgba(124,107,247,0.4);
+    }
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      background: #0a0a14;
+    }
+    .card-body {
+      padding: 14px 16px 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-date {
+      font-size: 11px;
+      color: var(--muted);
+    }
+    .card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.5;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--accent2);
+      margin-top: 4px;
+    }
+    .card-link::after {
+      content: '→';
+    }
+
+    /* ── SKILLS ── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 0;
+    }
+    .tool-chip {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .tool-chip span {
+      display: block;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 30px 20px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">AI Developer Portfolio</div>
+  <h1><img class="hero-avatar" src="img/mo_avatar.png" alt="MO アバター"><span class="name-text">MO</span></h1>
+  <p class="subtitle">Claude Code 活用ライター</p>
+  <p class="bio">
+    AIツールを徹底活用し、初心者にもわかりやすいAI学習記事を執筆。<br>
+    Claude Codeを使ったコンテンツ制作・業務自動化を実践中。
+  </p>
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">16</span>
+      <span class="stat-label">公開記事数</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2026</span>
+      <span class="stat-label">活動開始年</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">Claude Code</span>
+      <span class="stat-label">メインツール</span>
+    </div>
+  </div>
+</header>
+
+<!-- ARTICLES -->
+<main class="section">
+  <div class="section-header">
+    <h2 class="section-title">📝 note.com 公開記事</h2>
+    <div class="section-line"></div>
+    <span class="section-count">16 articles</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n5b72b7c11cfb" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_15_2026-06-13_n5b72b7c11cfb.png" alt="Claude Fable 5 提供停止">
+      <div class="card-body">
+        <span class="card-date">2026-06-13</span>
+        <p class="card-title">Claude Fable 5 提供停止とは？理由・移行先・企業への影響をわかりやすく解説</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/na2486669f245" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_16_2026-06-13_na2486669f245.png" alt="Claude Code 業務効率化">
+      <div class="card-body">
+        <span class="card-date">2026-06-13</span>
+        <p class="card-title">Claude Codeで実現できる業務効率化とは？今すぐ始める4つの活用法</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n32ada461305a" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_01_2026-06-10_n32ada461305a.png" alt="Claude Fable 5">
+      <div class="card-body">
+        <span class="card-date">2026-06-10</span>
+        <p class="card-title">Claude Fable 5とは？Opus超えの最上位モデルを解説</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n3a9539dc5c72" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_02_2026-06-06_n3a9539dc5c72.png" alt="LINEスタンプ 単体">
+      <div class="card-body">
+        <span class="card-date">2026-06-06</span>
+        <p class="card-title">AIでLINEスタンプを作ってみた【単体記事】〜 Claude Code で LINE スタンプを作ったら、予想外に本格的だった話 〜</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n9c5b1c795925" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_03_2026-06-06_n9c5b1c795925.png" alt="LINEスタンプ 第3部">
+      <div class="card-body">
+        <span class="card-date">2026-06-06</span>
+        <p class="card-title">AIでLINEスタンプを作ってみた【第3部】〜 LINEスタンプ申請・審査通過ガイド：リジェクト体験から学んだコツ</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n490891468963" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_04_2026-06-06_n490891468963.png" alt="LINEスタンプ 第2部">
+      <div class="card-body">
+        <span class="card-date">2026-06-06</span>
+        <p class="card-title">AIでLINEスタンプを作ってみた【第2部】〜 Claude Codeでスタンプ画像処理を30秒に自動化する方法</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n42ab971357bf" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_05_2026-06-06_n42ab971357bf.png" alt="LINEスタンプ 第1部">
+      <div class="card-body">
+        <span class="card-date">2026-06-06</span>
+        <p class="card-title">AIでLINEスタンプを作ってみた【第1部】〜 画像生成から素材準備まで 〜</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/nbf02ca4eaf1f" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_06_2026-06-03_nbf02ca4eaf1f.png" alt="Claude Code Obsidian NotebookLM">
+      <div class="card-body">
+        <span class="card-date">2026-06-03</span>
+        <p class="card-title">Claude Code・Obsidian・NotebookLMを組み合わせると何ができる？3大AIツールの最強活用術</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/nef9622a641ec" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_07_2026-06-02_nef9622a641ec.png" alt="Claude Code Obsidian">
+      <div class="card-body">
+        <span class="card-date">2026-06-02</span>
+        <p class="card-title">Claude Code × Obsidianの連携で知識管理はどう変わる？具体的な効果と活用法</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n8df08426fae6" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_08_2026-05-30_n8df08426fae6.png" alt="Claude Opus 4.8">
+      <div class="card-body">
+        <span class="card-date">2026-05-30</span>
+        <p class="card-title">Claude Opus 4.8とは？特徴・性能・次世代モデルまで徹底解説</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/ncb331db999f2" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_09_2026-05-29_ncb331db999f2.png" alt="Claude Code 自動化">
+      <div class="card-body">
+        <span class="card-date">2026-05-29</span>
+        <p class="card-title">Claude Codeで始める自動化の仕組みと活用法</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n5a46008ebb75" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_10_2026-05-28_n5a46008ebb75.png" alt="生成AI仕組み">
+      <div class="card-body">
+        <span class="card-date">2026-05-28</span>
+        <p class="card-title">今さら聞けない生成AIの仕組み｜ChatGPTはなぜ「賢い」のか、基礎から丸ごと解説</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n66eca0928021" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_11_2026-05-27_n66eca0928021.png" alt="Claude Mythos AI脅威">
+      <div class="card-body">
+        <span class="card-date">2026-05-27</span>
+        <p class="card-title">Claude Mythosって何？AIが「鍵泥棒」になる日――初心者にもわかる最新AI脅威と対策</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n90df2191f589" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_12_2026-05-25_n90df2191f589.png" alt="AIエージェント入門">
+      <div class="card-body">
+        <span class="card-date">2026-05-25</span>
+        <p class="card-title">AIエージェントってなに？初心者にもわかる仕組みと使い方ガイド</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n2252f2188d88" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_13_2026-05-23_n2252f2188d88.png" alt="Claude Mythos 中小企業">
+      <div class="card-body">
+        <span class="card-date">2026-05-23</span>
+        <p class="card-title">Claude Mythosの脅威と対応策：中小企業が今すぐ知るべきAIセキュリティリスク</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://note.com/mo0980/n/n901c2b701947" target="_blank" rel="noopener">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_14_2026-05-23_n901c2b701947.png" alt="AIエージェント未来">
+      <div class="card-body">
+        <span class="card-date">2026-05-23</span>
+        <p class="card-title">AIエージェントとは？現在の活用事例と2030年への未来予測</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+
+  </div>
+</main>
+
+<!-- TOOLS -->
+<section class="section" style="padding-top: 0;">
+  <div class="section-header">
+    <h2 class="section-title">🛠 使用ツール・技術</h2>
+    <div class="section-line"></div>
+  </div>
+  <div class="tools-grid">
+    <div class="tool-chip">Claude Code<span>AIコーディング</span></div>
+    <div class="tool-chip">Obsidian<span>知識管理</span></div>
+    <div class="tool-chip">NotebookLM<span>情報整理</span></div>
+    <div class="tool-chip">Playwright<span>ブラウザ自動化</span></div>
+    <div class="tool-chip">Python<span>スクリプト</span></div>
+    <div class="tool-chip">note.com<span>記事公開</span></div>
+    <div class="tool-chip">Gemini<span>画像生成</span></div>
+    <div class="tool-chip">LINE Creators<span>スタンプ申請</span></div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 MO ・ <a href="https://note.com/mo0980" target="_blank" rel="noopener">note.com/mo0980</a></p>
+</footer>
+
+<script>
+  // スクロールで要素をふわっと表示（モーション抑制設定を尊重）
+  (function () {
+    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var items = document.querySelectorAll('.reveal');
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { io.observe(el); });
+  })();
+</script>
+
+</body>
+</html>
