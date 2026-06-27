@@ -12,7 +12,11 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0f0f14">
   <meta name="color-scheme" content="dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://assets.st-note.com https://masa0980-sudo.github.io; connect-src 'none'; object-src 'none'; base-uri 'self"; frame-ancestors 'none'">
   <link rel="canonical" href="https://masa0980-sudo.github.io/mo-portfolio/">
+
+  <!-- Preload critical assets -->
+  <link rel="preload" as="image" href="img/mo_avatar.png" fetchpriority="high">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="img/mo_avatar.png">
@@ -231,6 +235,7 @@
       text-decoration: none;
       display: flex;
       flex-direction: column;
+      will-change: transform;
     }
     .card:hover {
       transform: translateY(-4px);
@@ -323,7 +328,7 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-badge">AI Developer Portfolio</div>
-  <h1><img class="hero-avatar" src="img/mo_avatar.png" alt="MO アバター" loading="eager"><span class="name-text">MO</span></h1>
+  <h1><img class="hero-avatar" src="img/mo_avatar.png" alt="MO アバター" loading="eager" fetchpriority="high" width="48" height="48"><span class="name-text">MO</span></h1>
   <p class="subtitle">Claude Code 活用ライター</p>
   <p class="bio">
     AIツールを徹底活用し、初心者にもわかりやすいAI学習記事を執筆。<br>
@@ -600,23 +605,51 @@
 </footer>
 
 <script>
-  // スクロールで要素をふわっと表示（モーション抑制設定を尊重）
-  (function () {
-    var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var items = document.querySelectorAll('.reveal');
-    if (prefersReduced || !('IntersectionObserver' in window)) {
-      items.forEach(function (el) { el.classList.add('is-visible'); });
-      return;
-    }
-    var io = new IntersectionObserver(function (entries) {
+  /**
+   * スクロール出現アニメーションの初期化
+   * prefers-reduced-motion / IntersectionObserver 非対応環境にフォールバック
+   */
+
+  /**
+   * @param {NodeListOf<Element>} items - .reveal 要素の一覧
+   * @returns {void}
+   */
+  function revealAllImmediately(items) {
+    items.forEach(function (el) {
+      el.classList.add('is-visible');
+    });
+  }
+
+  /**
+   * @param {NodeListOf<Element>} items - 監視対象の .reveal 要素
+   * @returns {void}
+   */
+  function setupRevealObserver(items) {
+    const revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          io.unobserve(entry.target);
+          revealObserver.unobserve(entry.target);
         }
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    items.forEach(function (el) { io.observe(el); });
+
+    items.forEach(function (el) {
+      revealObserver.observe(el);
+    });
+  }
+
+  /** エントリポイント */
+  (function initScrollReveal() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.reveal');
+
+    if (prefersReducedMotion || !('IntersectionObserver' in window)) {
+      revealAllImmediately(revealItems);
+      return;
+    }
+
+    setupRevealObserver(revealItems);
   })();
 </script>
 
