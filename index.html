@@ -12,7 +12,7 @@
   <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#0f0f14">
   <meta name="color-scheme" content="dark">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://assets.st-note.com https://masa0980-sudo.github.io; connect-src 'none'; object-src 'none'; base-uri 'self"; frame-ancestors 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data: https://assets.st-note.com https://masa0980-sudo.github.io; connect-src 'none'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'">
   <link rel="canonical" href="https://masa0980-sudo.github.io/mo-portfolio/">
 
   <!-- Preload critical assets -->
@@ -283,8 +283,14 @@
     .card-link::after {
       content: '→';
     }
+    .card-link--paid {
+      color: #f59e0b;
+    }
     .card-link--paid::after {
       content: '';
+    }
+    .section--flush-top {
+      padding-top: 0;
     }
 
     /* ── SKILLS ── */
@@ -328,7 +334,7 @@
 <!-- HERO -->
 <header class="hero">
   <div class="hero-badge">AI Developer Portfolio</div>
-  <h1><img class="hero-avatar" src="img/mo_avatar.png" alt="MO アバター" loading="eager" fetchpriority="high" width="48" height="48"><span class="name-text">MO</span></h1>
+  <h1><img class="hero-avatar" src="img/mo_avatar.png" alt="" loading="eager" fetchpriority="high" width="48" height="48"><span class="name-text">MO</span></h1>
   <p class="subtitle">Claude Code 活用ライター</p>
   <p class="bio">
     AIツールを徹底活用し、初心者にもわかりやすいAI学習記事を執筆。<br>
@@ -367,7 +373,7 @@
       <div class="card-body">
         <span class="card-date">2026-06-24</span>
         <p class="card-title">絵が描けなくてもOK。AIで売れるLINEスタンプを画像1枚から量産する全手順</p>
-        <span class="card-link card-link--paid" style="color:#f59e0b">💎 有料（770円）・note で読む</span>
+        <span class="card-link card-link--paid">💎 有料（770円）・note で読む</span>
       </div>
     </a>
 
@@ -581,7 +587,7 @@
 </section>
 
 <!-- TOOLS -->
-<section class="section" style="padding-top: 0;">
+<section class="section section--flush-top">
   <div class="section-header">
     <h2 class="section-title">🛠 使用ツール・技術</h2>
     <div class="section-line"></div>
