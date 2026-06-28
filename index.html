@@ -56,6 +56,18 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --bg: #0f0f14;
+      --surface: #1a1a24;
+      --card: #1e1e2e;
+      --border: rgba(255,255,255,0.08);
+      --accent: #7c6bf7;
+      --accent2: #a78bfa;
+      --text: #e4e4f0;
+      --muted: #9090a8;
+      --tag-bg: rgba(124,107,247,0.15);
+    }
+
     html { scroll-behavior: smooth; }
 
     /* アクセシビリティ：フォーカスリング */
@@ -80,18 +92,6 @@
       html { scroll-behavior: auto; }
       .reveal { opacity: 1; transform: none; transition: none; }
       .card { transition: none; }
-    }
-
-    :root {
-      --bg: #0f0f14;
-      --surface: #1a1a24;
-      --card: #1e1e2e;
-      --border: rgba(255,255,255,0.08);
-      --accent: #7c6bf7;
-      --accent2: #a78bfa;
-      --text: #e4e4f0;
-      --muted: #9090a8;
-      --tag-bg: rgba(124,107,247,0.15);
     }
 
     body {
@@ -235,12 +235,12 @@
       text-decoration: none;
       display: flex;
       flex-direction: column;
-      will-change: transform;
     }
     .card:hover {
       transform: translateY(-4px);
       box-shadow: 0 12px 40px rgba(124,107,247,0.2);
       border-color: rgba(124,107,247,0.4);
+      will-change: transform;
     }
     .card-thumb {
       width: 100%;
