@@ -216,6 +216,48 @@
       color: var(--muted);
     }
 
+    /* ── TABS ── */
+    .tab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px 20px 0;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      font-family: inherit;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 24px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .tab-btn:hover { color: var(--text); border-color: rgba(124,107,247,0.4); }
+    .tab-btn.is-active {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(124,107,247,0.35);
+    }
+    .tab-panel[hidden] { display: none; }
+
+    /* ゲームカード: サムネイルは中央クロップ、2枚しかないので中央寄せグリッド */
+    .game-card .card-thumb { object-position: center; }
+    .game-card.game-card--alt .card-thumb { filter: hue-rotate(160deg); }
+    /* .grid.grid--games（複合セレクタ）で詳細度を上げ、.grid本体と
+       @media(900px/560px)の.gridルールより常に優先されるようにする
+       （単一クラス同士だとソース順で決まってしまい、900px未満の幅で
+       意図せず.grid側の2列/1列ルールに上書きされていたため） */
+    .grid.grid--games {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
     /* ── GRID ── */
     .grid {
       display: grid;
@@ -356,7 +398,19 @@
   </div>
 </header>
 
+<nav class="tab-bar" role="tablist" aria-label="コンテンツ切り替え">
+  <button type="button" class="tab-btn is-active" id="tab-btn-articles"
+          role="tab" aria-selected="true" aria-controls="tab-panel-articles"
+          data-tab-target="articles">📝 記事</button>
+  <button type="button" class="tab-btn" id="tab-btn-games"
+          role="tab" aria-selected="false" aria-controls="tab-panel-games"
+          data-tab-target="games">🕹 ゲーム</button>
+</nav>
+
 <main>
+
+<div class="tab-panel" data-tab="articles" id="tab-panel-articles"
+     role="tabpanel" aria-labelledby="tab-btn-articles">
 
 <!-- 有料記事 -->
 <section class="section">
@@ -703,6 +757,44 @@
   </div>
 </section>
 
+</div><!-- /tab-panel: articles -->
+
+<div class="tab-panel" data-tab="games" id="tab-panel-games" hidden
+     role="tabpanel" aria-labelledby="tab-btn-games">
+
+<!-- デイリークイズ -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">🕹 デイリークイズ</h2>
+    <div class="section-line"></div>
+    <span class="section-count">2 games</span>
+  </div>
+
+  <div class="grid grid--games">
+
+    <a class="card reveal game-card" href="https://masa0980-sudo.github.io/daily-claude-quiz/" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/game_01_2026-07-30_daily-claude-quiz.png" alt="デイリー Claude Code クイズ キーアート">
+      <div class="card-body">
+        <span class="card-date">1日3問・全90問・30日周回</span>
+        <p class="card-title">デイリー Claude Code クイズ</p>
+        <span class="card-link">🕹 プレイする</span>
+      </div>
+    </a>
+
+    <a class="card reveal game-card game-card--alt" href="https://masa0980-sudo.github.io/daily-genai-quiz/" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/game_02_2026-07-30_daily-genai-quiz.png" alt="デイリー 生成AIクイズ キーアート">
+      <div class="card-body">
+        <span class="card-date">1日3問・全90問・30日周回</span>
+        <p class="card-title">デイリー 生成AIクイズ</p>
+        <span class="card-link">🕹 プレイする</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+</div><!-- /tab-panel: games -->
+
 <!-- TOOLS -->
 <section class="section section--flush-top">
   <div class="section-header">
@@ -773,6 +865,35 @@
     }
 
     setupRevealObserver(revealItems);
+  })();
+
+  /**
+   * タブ切り替え。data-tab-target / data-tab の値集合を実行時に読むだけの
+   * 汎用実装。新しいタブを追加する際はHTMLにボタン+パネルを1組追加するだけで
+   * このJSの変更は不要。
+   */
+  (function initTabs() {
+    const tabButtons = document.querySelectorAll('.tab-btn[data-tab-target]');
+    const tabPanels = document.querySelectorAll('.tab-panel[data-tab]');
+
+    if (!tabButtons.length || !tabPanels.length) return;
+
+    function activateTab(tabName) {
+      tabPanels.forEach(function (panel) {
+        panel.hidden = panel.dataset.tab !== tabName;
+      });
+      tabButtons.forEach(function (btn) {
+        const isActive = btn.dataset.tabTarget === tabName;
+        btn.classList.toggle('is-active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+    }
+
+    tabButtons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        activateTab(btn.dataset.tabTarget);
+      });
+    });
   })();
 </script>
 
