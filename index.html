@@ -256,18 +256,21 @@
     .stamp-card .card-thumb {
       aspect-ratio: 1/1;
       object-position: center;
+      background: #fff;
     }
-    .stamp-oldversions {
-      text-align: center;
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 20px;
+    .stamp-card-wrap {
+      position: relative;
     }
-    .stamp-oldversions a {
+    .stamp-oldversion-link {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      font-size: 11px;
       color: var(--muted);
       text-decoration: underline;
+      z-index: 2;
     }
-    .stamp-oldversions a:hover {
+    .stamp-oldversion-link:hover {
       color: var(--accent2);
     }
     /* .grid.grid--games（複合セレクタ）で詳細度を上げ、.grid本体と
@@ -843,32 +846,41 @@
 
   <div class="grid">
 
-    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34331909" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_01_funifuni2026.png" alt="funifuni2026 LINEスタンプ">
-      <div class="card-body">
-        <span class="card-date">LINEスタンプ</span>
-        <p class="card-title">funifuni2026</p>
-        <span class="card-link card-link--paid">🛒 購入する</span>
-      </div>
-    </a>
+    <div class="stamp-card-wrap">
+      <a class="card reveal stamp-card" href="https://line.me/S/sticker/34331909" target="_blank" rel="noopener noreferrer">
+        <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_01_funifuni2026.png" alt="funifuni2026 LINEスタンプ">
+        <div class="card-body">
+          <span class="card-date">LINEスタンプ</span>
+          <p class="card-title">funifuni2026</p>
+          <span class="card-link card-link--paid">🛒 購入する</span>
+        </div>
+      </a>
+      <a class="stamp-oldversion-link" href="https://line.me/S/sticker/34242204" target="_blank" rel="noopener noreferrer">旧版(v1.0)</a>
+    </div>
 
-    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34323866" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_02_kotokoto2026.png" alt="kotokoto2026 LINEスタンプ">
-      <div class="card-body">
-        <span class="card-date">LINEスタンプ</span>
-        <p class="card-title">kotokoto2026</p>
-        <span class="card-link card-link--paid">🛒 購入する</span>
-      </div>
-    </a>
+    <div class="stamp-card-wrap">
+      <a class="card reveal stamp-card" href="https://line.me/S/sticker/34323866" target="_blank" rel="noopener noreferrer">
+        <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_02_kotokoto2026.png" alt="kotokoto2026 LINEスタンプ">
+        <div class="card-body">
+          <span class="card-date">LINEスタンプ</span>
+          <p class="card-title">kotokoto2026</p>
+          <span class="card-link card-link--paid">🛒 購入する</span>
+        </div>
+      </a>
+      <a class="stamp-oldversion-link" href="https://line.me/S/sticker/34242392" target="_blank" rel="noopener noreferrer">旧版(v1.0)</a>
+    </div>
 
-    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34359833" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_03_fuufuu2026.png" alt="fuufuu2026 LINEスタンプ">
-      <div class="card-body">
-        <span class="card-date">LINEスタンプ</span>
-        <p class="card-title">fuufuu2026</p>
-        <span class="card-link card-link--paid">🛒 購入する</span>
-      </div>
-    </a>
+    <div class="stamp-card-wrap">
+      <a class="card reveal stamp-card" href="https://line.me/S/sticker/34359833" target="_blank" rel="noopener noreferrer">
+        <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_03_fuufuu2026.png" alt="fuufuu2026 LINEスタンプ">
+        <div class="card-body">
+          <span class="card-date">LINEスタンプ</span>
+          <p class="card-title">fuufuu2026</p>
+          <span class="card-link card-link--paid">🛒 購入する</span>
+        </div>
+      </a>
+      <a class="stamp-oldversion-link" href="https://line.me/S/sticker/34344908" target="_blank" rel="noopener noreferrer">旧版(v1.0)</a>
+    </div>
 
     <a class="card reveal stamp-card" href="https://line.me/S/sticker/34647940" target="_blank" rel="noopener noreferrer">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_04_lady2026.png" alt="lady2026 LINEスタンプ">
@@ -916,15 +928,6 @@
     </a>
 
   </div>
-
-  <p class="stamp-oldversions">
-    旧バージョン:
-    <a href="https://line.me/S/sticker/34242204" target="_blank" rel="noopener noreferrer">funifuni2026 (v1.0)</a>
-    ／
-    <a href="https://line.me/S/sticker/34242392" target="_blank" rel="noopener noreferrer">kotokoto2026 (v1.0)</a>
-    ／
-    <a href="https://line.me/S/sticker/34344908" target="_blank" rel="noopener noreferrer">fuufuu2026 (v1.0)</a>
-  </p>
 </section>
 
 </div><!-- /tab-panel: stamps -->
