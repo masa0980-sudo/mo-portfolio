@@ -279,16 +279,6 @@
     .stamp-oldversion-link:hover {
       color: var(--accent2);
     }
-    /* .grid.grid--games（複合セレクタ）で詳細度を上げ、.grid本体と
-       @media(900px/560px)の.gridルールより常に優先されるようにする
-       （単一クラス同士だとソース順で決まってしまい、900px未満の幅で
-       意図せず.grid側の2列/1列ルールに上書きされていたため） */
-    .grid.grid--games {
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      max-width: 760px;
-      margin: 0 auto;
-    }
-
     /* ── GRID ── */
     .grid {
       display: grid;
@@ -423,7 +413,7 @@
       <span class="stat-label">公開LINEスタンプ数</span>
     </div>
     <div class="stat">
-      <span class="stat-num">2</span>
+      <span class="stat-num">3</span>
       <span class="stat-label">公開ゲーム数</span>
     </div>
   </div>
@@ -806,15 +796,24 @@
 <div class="tab-panel" data-tab="games" id="tab-panel-games" hidden
      role="tabpanel" aria-labelledby="tab-btn-games">
 
-<!-- デイリークイズ -->
+<!-- ゲーム -->
 <section class="section">
   <div class="section-header">
-    <h2 class="section-title">🕹 デイリークイズ</h2>
+    <h2 class="section-title">🕹 ゲーム</h2>
     <div class="section-line"></div>
-    <span class="section-count">2 games</span>
+    <span class="section-count">3 games</span>
   </div>
 
-  <div class="grid grid--games">
+  <div class="grid">
+
+    <a class="card reveal game-card" href="https://masa0980-sudo.github.io/neon-void/" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/game_00_2026-07-04_neon-void.png" alt="NEON VOID キーアート">
+      <div class="card-body">
+        <span class="card-date">シンセウェーブ・シューティング</span>
+        <p class="card-title">NEON VOID</p>
+        <span class="card-link">🕹 プレイする</span>
+      </div>
+    </a>
 
     <a class="card reveal game-card" href="https://masa0980-sudo.github.io/daily-claude-quiz/" target="_blank" rel="noopener noreferrer">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/game_01_2026-07-30_daily-claude-quiz.png" alt="デイリー Claude Code クイズ キーアート">
