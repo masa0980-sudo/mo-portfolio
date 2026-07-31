@@ -253,6 +253,23 @@
     /* ゲームカード: サムネイルは中央クロップ、2枚しかないので中央寄せグリッド */
     .game-card .card-thumb { object-position: center; }
     .game-card.game-card--alt .card-thumb { filter: hue-rotate(160deg); }
+    .stamp-card .card-thumb {
+      aspect-ratio: 1/1;
+      object-position: center;
+    }
+    .stamp-oldversions {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 20px;
+    }
+    .stamp-oldversions a {
+      color: var(--muted);
+      text-decoration: underline;
+    }
+    .stamp-oldversions a:hover {
+      color: var(--accent2);
+    }
     /* .grid.grid--games（複合セレクタ）で詳細度を上げ、.grid本体と
        @media(900px/560px)の.gridルールより常に優先されるようにする
        （単一クラス同士だとソース順で決まってしまい、900px未満の幅で
@@ -393,6 +410,10 @@
       <span class="stat-label">公開記事数</span>
     </div>
     <div class="stat">
+      <span class="stat-num">8</span>
+      <span class="stat-label">公開LINEスタンプ数</span>
+    </div>
+    <div class="stat">
       <span class="stat-num">2</span>
       <span class="stat-label">公開ゲーム数</span>
     </div>
@@ -416,6 +437,9 @@
   <button type="button" class="tab-btn" id="tab-btn-games"
           role="tab" aria-selected="false" aria-controls="tab-panel-games"
           data-tab-target="games">🕹 ゲーム</button>
+  <button type="button" class="tab-btn" id="tab-btn-stamps"
+          role="tab" aria-selected="false" aria-controls="tab-panel-stamps"
+          data-tab-target="stamps">🧸 スタンプ</button>
 </nav>
 
 <main>
@@ -805,6 +829,105 @@
 </section>
 
 </div><!-- /tab-panel: games -->
+
+<div class="tab-panel" data-tab="stamps" id="tab-panel-stamps" hidden
+     role="tabpanel" aria-labelledby="tab-btn-stamps">
+
+<!-- LINEスタンプ -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">🧸 LINEスタンプ</h2>
+    <div class="section-line"></div>
+    <span class="section-count">8 stamps</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34331909" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_01_funifuni2026.png" alt="funifuni2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">funifuni2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34323866" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_02_kotokoto2026.png" alt="kotokoto2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">kotokoto2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34359833" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_03_fuufuu2026.png" alt="fuufuu2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">fuufuu2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34647940" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_04_lady2026.png" alt="lady2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">lady2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34646954" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_05_pretty_girl2026.png" alt="pretty_girl2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">pretty_girl2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34648134" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_06_megane_boy2026.png" alt="megane_boy2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">megane_boy2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34672928" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_07_gentleman2026.png" alt="gentleman2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">gentleman2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/34900466" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_08_papapapa2026.png" alt="papapapa2026 LINEスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEスタンプ</span>
+        <p class="card-title">papapapa2026</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+  </div>
+
+  <p class="stamp-oldversions">
+    旧バージョン:
+    <a href="https://line.me/S/sticker/34242204" target="_blank" rel="noopener noreferrer">funifuni2026 (v1.0)</a>
+    ／
+    <a href="https://line.me/S/sticker/34242392" target="_blank" rel="noopener noreferrer">kotokoto2026 (v1.0)</a>
+    ／
+    <a href="https://line.me/S/sticker/34344908" target="_blank" rel="noopener noreferrer">fuufuu2026 (v1.0)</a>
+  </p>
+</section>
+
+</div><!-- /tab-panel: stamps -->
 
 <!-- TOOLS -->
 <section class="section section--flush-top">
