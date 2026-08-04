@@ -279,6 +279,39 @@
     .stamp-oldversion-link:hover {
       color: var(--accent2);
     }
+    .board-cta {
+      max-width: 560px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 20px 20px 40px;
+    }
+    .board-cta-desc {
+      color: #c0c0d8;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+    .board-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 32px;
+      border-radius: 999px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(124,107,247,0.35);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .board-cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(124,107,247,0.45);
+    }
+    .board-cta-btn::after {
+      content: '→';
+    }
     /* ── GRID ── */
     .grid {
       display: grid;
@@ -439,6 +472,9 @@
   <button type="button" class="tab-btn" id="tab-btn-games"
           role="tab" aria-selected="false" aria-controls="tab-panel-games"
           data-tab-target="games">🕹 ゲーム</button>
+  <button type="button" class="tab-btn" id="tab-btn-board"
+          role="tab" aria-selected="false" aria-controls="tab-panel-board"
+          data-tab-target="board">💬 掲示板</button>
 </nav>
 
 <main>
@@ -837,6 +873,27 @@
 </section>
 
 </div><!-- /tab-panel: games -->
+
+<div class="tab-panel" data-tab="board" id="tab-panel-board" hidden
+     role="tabpanel" aria-labelledby="tab-btn-board">
+
+<!-- 掲示板 -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">💬 ひとこと掲示板</h2>
+    <div class="section-line"></div>
+  </div>
+
+  <div class="board-cta">
+    <p class="board-cta-desc">
+      お名前と一言メッセージを投稿できる掲示板です。AIキャラからの返信も届きます。<br>
+      投稿内容は確認後に公開されます。
+    </p>
+    <a class="board-cta-btn" href="https://20260803-kadai.vercel.app/" target="_blank" rel="noopener noreferrer">💬 掲示板を開く</a>
+  </div>
+</section>
+
+</div><!-- /tab-panel: board -->
 
 <div class="tab-panel" data-tab="stamps" id="tab-panel-stamps" hidden
      role="tabpanel" aria-labelledby="tab-btn-stamps">
