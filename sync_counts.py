@@ -18,7 +18,9 @@ import re
 import sys
 from pathlib import Path
 
-TARGET = Path(r"C:\claude\mo-portfolio\index.html")
+# このスクリプト自身と同じフォルダの index.html を対象にする
+# （リポジトリをどこへ移動しても壊れないよう絶対パスは書かない）
+TARGET = Path(__file__).resolve().parent / "index.html"
 
 CARD_RE = re.compile(r'<a class="card reveal"')
 SECTION_RE = re.compile(r'<section class="section[^"]*">.*?</section>', re.DOTALL)
