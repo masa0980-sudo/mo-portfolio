@@ -27,7 +27,10 @@ SECTION_RE = re.compile(r'<section class="section[^"]*">.*?</section>', re.DOTAL
 SECTION_COUNT_RE = re.compile(r'<span class="section-count">\d+ articles?</span>')
 
 DESC_RE = re.compile(r'(公開した)\d+(本のAI学習記事)')
-TWITTER_RE = re.compile(r'(note\.com の)\d+(記事をまとめた)')
+# 媒体名は note.com 単独から「note.com・Brain・Zenn」へ増える可能性があるため、
+# 媒体名そのものは固定せず「〜の N記事をまとめた」の形だけを見る。
+# （媒体名をハードコードしていたせいで、Zenn/Brain 追加時に不一致になった）
+TWITTER_RE = re.compile(r'([^、。]{0,40}の)\d+(記事をまとめた)')
 STATNUM_RE = re.compile(r'(<span class="stat-num">)\d+(</span>\s*<span class="stat-label">公開記事数)')
 
 

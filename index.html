@@ -6,7 +6,7 @@
   <title>MO | AI活用ポートフォリオ｜Claude Code 活用ライター</title>
 
   <!-- SEO -->
-  <meta name="description" content="MO のAI活用ポートフォリオ。Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com で公開した47本のAI学習記事をまとめています。">
+  <meta name="description" content="MO のAI活用ポートフォリオ。Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した50本のAI学習記事をまとめています。">
   <meta name="author" content="MO">
   <meta name="keywords" content="MO, Claude Code, AI, 生成AI, 自動化, note, ポートフォリオ, AIライター">
   <meta name="robots" content="index, follow">
@@ -26,7 +26,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MO | AI活用ポートフォリオ">
   <meta property="og:title" content="MO | AI活用ポートフォリオ｜Claude Code 活用ライター">
-  <meta property="og:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com で公開した47本のAI学習記事をまとめたポートフォリオ。">
+  <meta property="og:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した50本のAI学習記事をまとめたポートフォリオ。">
   <meta property="og:url" content="https://masa0980-sudo.github.io/mo-portfolio/">
   <meta property="og:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
   <meta property="og:image:width" content="1200">
@@ -36,7 +36,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MO | AI活用ポートフォリオ">
-  <meta name="twitter:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com の47記事をまとめたポートフォリオ。">
+  <meta name="twitter:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn の50記事をまとめたポートフォリオ。">
   <meta name="twitter:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
 
   <!-- 構造化データ -->
@@ -256,6 +256,35 @@
     }
     .tab-panel[hidden] { display: none; }
 
+    /* 記事タブの中の媒体切替（note / Brain / Zenn）。
+       階層が1つ下だと分かるよう、親タブより小さく控えめにする。 */
+    .subtab-bar {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 28px 20px 0;
+      flex-wrap: wrap;
+    }
+    .subtab-btn {
+      font-family: inherit;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 7px 18px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .subtab-btn:hover { color: var(--text); border-color: rgba(124,107,247,0.4); }
+    .subtab-btn.is-active {
+      background: var(--tag-bg);
+      color: var(--accent2);
+      border-color: rgba(124,107,247,0.5);
+    }
+    .subtab-panel[hidden] { display: none; }
+
     /* ゲームカード: サムネイルは中央クロップ、2枚しかないので中央寄せグリッド */
     .game-card .card-thumb { object-position: center; }
     .stamp-card .card-thumb {
@@ -437,7 +466,7 @@
   </p>
   <div class="stats">
     <div class="stat">
-      <span class="stat-num">47</span>
+      <span class="stat-num">50</span>
       <span class="stat-label">公開記事数</span>
     </div>
     <div class="stat">
@@ -480,6 +509,21 @@
 
 <div class="tab-panel" data-tab="articles" id="tab-panel-articles"
      role="tabpanel" aria-labelledby="tab-btn-articles">
+
+<nav class="subtab-bar" role="tablist" aria-label="掲載媒体の切り替え">
+  <button type="button" class="subtab-btn is-active" id="subtab-btn-note"
+          role="tab" aria-selected="true" aria-controls="subtab-panel-note"
+          data-subtab-target="note">📝 note</button>
+  <button type="button" class="subtab-btn" id="subtab-btn-brain"
+          role="tab" aria-selected="false" aria-controls="subtab-panel-brain"
+          data-subtab-target="brain">🧠 Brain</button>
+  <button type="button" class="subtab-btn" id="subtab-btn-zenn"
+          role="tab" aria-selected="false" aria-controls="subtab-panel-zenn"
+          data-subtab-target="zenn">📘 Zenn</button>
+</nav>
+
+<div class="subtab-panel" data-subtab="note" id="subtab-panel-note"
+     role="tabpanel" aria-labelledby="subtab-btn-note">
 
 <!-- 有料記事 -->
 <section class="section">
@@ -943,6 +987,71 @@
   </div>
 </section>
 
+</div><!-- /subtab-panel: note -->
+
+<div class="subtab-panel" data-subtab="brain" id="subtab-panel-brain" hidden
+     role="tabpanel" aria-labelledby="subtab-btn-brain">
+
+<!-- Brain 有料記事 -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">🧠 Brain 有料記事</h2>
+    <div class="section-line"></div>
+    <span class="section-count">2 articles</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal" href="https://brain-market.com/u/ma0980/a/b4YjNyYjMgoTZsNWa0JXY" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/brain_01_2026-08-25_b4YjNyYjMgoTZsNWa0JXY.png" alt="Windows音声入力アプリ 導入＆実運用ガイド">
+      <div class="card-body">
+        <span class="card-date">2026-08-25</span>
+        <p class="card-title">【無料ツール付き】話すだけで文字入力！Windows音声入力アプリ導入＆実運用ガイド</p>
+        <span class="card-link card-link--paid">💎 有料（980円）・Brain で読む</span>
+      </div>
+    </a>
+
+    <a class="card reveal" href="https://brain-market.com/u/ma0980/a/bzADOzUjMgoTZsNWa0JXY" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/brain_02_2026-07-08_bzADOzUjMgoTZsNWa0JXY.png" alt="AIで売れるLINEスタンプを量産する全手順">
+      <div class="card-body">
+        <span class="card-date">2026-07-08</span>
+        <p class="card-title">絵が描けなくてもOK。AIで"売れるLINEスタンプ"を画像1枚から量産する全手順</p>
+        <span class="card-link card-link--paid">💎 有料（980円）・Brain で読む</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+</div><!-- /subtab-panel: brain -->
+
+<div class="subtab-panel" data-subtab="zenn" id="subtab-panel-zenn" hidden
+     role="tabpanel" aria-labelledby="subtab-btn-zenn">
+
+<!-- Zenn 技術記事 -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">📘 Zenn 技術記事</h2>
+    <div class="section-line"></div>
+    <span class="section-count">1 article</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal" href="https://zenn.dev/mo0980/articles/whisper-accuracy-ab-testing" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/zenn_01_2026-08-27_whisper-accuracy-ab-testing.png" alt="Whisperの精度改善 5施策の実測">
+      <div class="card-body">
+        <span class="card-date">2026-08-27</span>
+        <p class="card-title">Whisperの精度改善、5施策を実測したら3つ棄却になった話</p>
+        <span class="card-link">Zenn で読む</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+</div><!-- /subtab-panel: zenn -->
+
 </div><!-- /tab-panel: articles -->
 
 <div class="tab-panel" data-tab="games" id="tab-panel-games" hidden
@@ -1210,33 +1319,45 @@
   })();
 
   /**
-   * タブ切り替え。data-tab-target / data-tab の値集合を実行時に読むだけの
-   * 汎用実装。新しいタブを追加する際はHTMLにボタン+パネルを1組追加するだけで
+   * タブ切り替え。data属性の値集合を実行時に読むだけの汎用実装。
+   * 新しいタブを追加する際はHTMLにボタン+パネルを1組追加するだけで
    * このJSの変更は不要。
+   *
+   * 親タブ（記事/スタンプ/ゲーム/掲示板）と、記事タブ内の媒体切替
+   * （note/Brain/Zenn）で同じロジックを使うため、セレクタと
+   * dataset のキー名を引数で受け取る形にしてある。
+   *
+   * @param {string} btnSelector   ボタンのセレクタ
+   * @param {string} panelSelector パネルのセレクタ
+   * @param {string} targetKey     ボタン側の dataset キー（例: 'tabTarget'）
+   * @param {string} panelKey      パネル側の dataset キー（例: 'tab'）
    */
-  (function initTabs() {
-    const tabButtons = document.querySelectorAll('.tab-btn[data-tab-target]');
-    const tabPanels = document.querySelectorAll('.tab-panel[data-tab]');
+  function initTabGroup(btnSelector, panelSelector, targetKey, panelKey) {
+    const buttons = document.querySelectorAll(btnSelector);
+    const panels = document.querySelectorAll(panelSelector);
 
-    if (!tabButtons.length || !tabPanels.length) return;
+    if (!buttons.length || !panels.length) return;
 
-    function activateTab(tabName) {
-      tabPanels.forEach(function (panel) {
-        panel.hidden = panel.dataset.tab !== tabName;
+    function activate(name) {
+      panels.forEach(function (panel) {
+        panel.hidden = panel.dataset[panelKey] !== name;
       });
-      tabButtons.forEach(function (btn) {
-        const isActive = btn.dataset.tabTarget === tabName;
+      buttons.forEach(function (btn) {
+        const isActive = btn.dataset[targetKey] === name;
         btn.classList.toggle('is-active', isActive);
         btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
       });
     }
 
-    tabButtons.forEach(function (btn) {
+    buttons.forEach(function (btn) {
       btn.addEventListener('click', function () {
-        activateTab(btn.dataset.tabTarget);
+        activate(btn.dataset[targetKey]);
       });
     });
-  })();
+  }
+
+  initTabGroup('.tab-btn[data-tab-target]', '.tab-panel[data-tab]', 'tabTarget', 'tab');
+  initTabGroup('.subtab-btn[data-subtab-target]', '.subtab-panel[data-subtab]', 'subtabTarget', 'subtab');
 </script>
 
 </body>
