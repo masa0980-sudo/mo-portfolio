@@ -195,13 +195,22 @@
     .nav-count { font-family: var(--mono); font-size: 11px; color: var(--dim); }
     .nav-btn.is-active .nav-count { color: var(--muted); }
 
-    /* 媒体切替（記事タブのときだけ出す） */
-    .nav-group--media[hidden] { display: none; }
+    /* 媒体切替。「記事」の子であることが分かるよう、
+       左に縦のガイド線を引いて一段下げる。 */
+    .nav-media {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 4px 0 6px 21px;
+      padding-left: 10px;
+      border-left: 1px solid var(--border-soft);
+    }
+    .nav-media[hidden] { display: none; }
     .media-btn {
       font-family: inherit;
-      display: flex; align-items: center; gap: 11px;
+      display: flex; align-items: center; gap: 10px;
       width: 100%; text-align: left;
-      padding: 8px 12px; border-radius: 7px;
+      padding: 7px 10px; border-radius: 6px;
       background: transparent; border: none;
       color: #99a1b0; font-size: 13px;
       cursor: pointer;
@@ -548,6 +557,32 @@
       <span class="nav-count" data-sync="articles">51</span>
     </button>
 
+    <div class="nav-media" id="nav-media" role="group" aria-label="掲載媒体の切り替え">
+      <button type="button" class="media-btn subtab-btn is-active" id="subtab-btn-note"
+              aria-pressed="true" aria-controls="subtab-panel-note"
+              data-subtab-target="note">
+        <span class="media-dot" style="background:#6ea8fe"></span>
+        <span class="media-btn-label">note</span>
+        <span class="nav-count">47</span>
+      </button>
+
+      <button type="button" class="media-btn subtab-btn" id="subtab-btn-brain"
+              aria-pressed="false" aria-controls="subtab-panel-brain"
+              data-subtab-target="brain">
+        <span class="media-dot" style="background:#f0a35e"></span>
+        <span class="media-btn-label">Brain</span>
+        <span class="nav-count">2</span>
+      </button>
+
+      <button type="button" class="media-btn subtab-btn" id="subtab-btn-zenn"
+              aria-pressed="false" aria-controls="subtab-panel-zenn"
+              data-subtab-target="zenn">
+        <span class="media-dot" style="background:#5ec9c0"></span>
+        <span class="media-btn-label">Zenn</span>
+        <span class="nav-count">2</span>
+      </button>
+    </div>
+
     <button type="button" class="nav-btn tab-btn" id="tab-btn-stamps"
             role="tab" aria-selected="false" aria-controls="tab-panel-stamps"
             data-tab-target="stamps">
@@ -572,33 +607,6 @@
     </button>
   </nav>
 
-  <nav class="nav-group nav-group--media" id="nav-media" role="tablist" aria-label="掲載媒体の切り替え">
-    <div class="nav-label">MEDIA</div>
-
-    <button type="button" class="media-btn subtab-btn is-active" id="subtab-btn-note"
-            role="tab" aria-selected="true" aria-controls="subtab-panel-note"
-            data-subtab-target="note">
-      <span class="media-dot" style="background:#6ea8fe"></span>
-      <span class="media-btn-label">note</span>
-      <span class="nav-count">47</span>
-    </button>
-
-    <button type="button" class="media-btn subtab-btn" id="subtab-btn-brain"
-            role="tab" aria-selected="false" aria-controls="subtab-panel-brain"
-            data-subtab-target="brain">
-      <span class="media-dot" style="background:#f0a35e"></span>
-      <span class="media-btn-label">Brain</span>
-      <span class="nav-count">2</span>
-    </button>
-
-    <button type="button" class="media-btn subtab-btn" id="subtab-btn-zenn"
-            role="tab" aria-selected="false" aria-controls="subtab-panel-zenn"
-            data-subtab-target="zenn">
-      <span class="media-dot" style="background:#5ec9c0"></span>
-      <span class="media-btn-label">Zenn</span>
-      <span class="nav-count">2</span>
-    </button>
-  </nav>
 
   <div class="sidebar-foot">SINCE 2026<br>MAIN: CLAUDE CODE</div>
 </aside>
@@ -1469,8 +1477,11 @@
    * @param {string} panelSelector パネルのセレクタ
    * @param {string} targetKey     ボタン側の dataset キー（例: 'tabTarget'）
    * @param {string} panelKey      パネル側の dataset キー（例: 'tab'）
+   * @param {string} ariaAttr      選択状態を表す属性。役割によって変わるので引数で受ける
+   *                               （tablist の tab は aria-selected、
+   *                                 それ以外のトグルボタンは aria-pressed）
    */
-  function initTabGroup(btnSelector, panelSelector, targetKey, panelKey) {
+  function initTabGroup(btnSelector, panelSelector, targetKey, panelKey, ariaAttr) {
     const buttons = document.querySelectorAll(btnSelector);
     const panels = document.querySelectorAll(panelSelector);
 
@@ -1483,7 +1494,7 @@
       buttons.forEach(function (btn) {
         const isActive = btn.dataset[targetKey] === name;
         btn.classList.toggle('is-active', isActive);
-        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        btn.setAttribute(ariaAttr, isActive ? 'true' : 'false');
       });
     }
 
@@ -1494,8 +1505,8 @@
     });
   }
 
-  initTabGroup('.tab-btn[data-tab-target]', '.tab-panel[data-tab]', 'tabTarget', 'tab');
-  initTabGroup('.subtab-btn[data-subtab-target]', '.subtab-panel[data-subtab]', 'subtabTarget', 'subtab');
+  initTabGroup('.tab-btn[data-tab-target]', '.tab-panel[data-tab]', 'tabTarget', 'tab', 'aria-selected');
+  initTabGroup('.subtab-btn[data-subtab-target]', '.subtab-panel[data-subtab]', 'subtabTarget', 'subtab', 'aria-pressed');
 
   /**
    * 媒体（note/Brain/Zenn）の切替は記事タブの中だけの概念なので、
