@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -X utf8 sync_counts.py)",
+      "Bash(python3 -m http.server *)",
+      "Bash(.claude/scripts/serve.sh:*)",
+      "Bash(.claude/scripts/check.sh)",
+      "mcp__github__actions_list",
+      "mcp__github__get_job_logs"
+    ]
+  }
+}
