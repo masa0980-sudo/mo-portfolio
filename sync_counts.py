@@ -31,7 +31,11 @@ DESC_RE = re.compile(r'(公開した)\d+(本のAI学習記事)')
 # 媒体名そのものは固定せず「〜の N記事をまとめた」の形だけを見る。
 # （媒体名をハードコードしていたせいで、Zenn/Brain 追加時に不一致になった）
 TWITTER_RE = re.compile(r'([^、。]{0,40}の)\d+(記事をまとめた)')
-STATNUM_RE = re.compile(r'(<span class="stat-num">)\d+(</span>\s*<span class="stat-label">公開記事数)')
+# サイドバーのナビに出す件数。data-sync 属性で対象を名指しするので、
+# 見た目のマークアップを変えても壊れない。
+# （旧ヒーローの stat-num / stat-label はサイドバー化で廃止した。
+#   件数の表示場所はここ1箇所に集約してある）
+NAVCOUNT_RE = re.compile(r'(<span class="nav-count" data-sync="articles">)\d+(</span>)')
 
 
 def main():
@@ -59,6 +63,8 @@ def main():
 
     new_html = SECTION_RE.sub(fix_section, html)
 
+    missing = []
+
     def sync_total(pattern: re.Pattern, label: str):
         nonlocal new_html
 
@@ -69,11 +75,22 @@ def main():
                 changes.append(f"{label}: {old} -> {new}")
             return new
 
-        new_html = pattern.sub(repl, new_html)
+        new_html, n = pattern.subn(repl, new_html)
+        # 1件も当たらないのは「同期したつもりで古い数字が残る」状態。
+        # re.sub は黙って何もしないので、ここで気づけるようにする。
+        if n == 0:
+            missing.append(label)
 
     sync_total(DESC_RE, "description")
     sync_total(TWITTER_RE, "twitter")
-    sync_total(STATNUM_RE, "stat-num")
+    sync_total(NAVCOUNT_RE, "nav-count")
+
+    if missing:
+        sys.stderr.write(
+            "WARN: 同期対象が見つかりませんでした: "
+            + ", ".join(missing)
+            + "\n      index.html の該当箇所を消したか、書式を変えた可能性があります。\n"
+        )
 
     if new_html == html:
         print(f"OK: 変更なし（既に同期済み・総記事数 {total}件）")
