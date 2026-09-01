@@ -14,12 +14,27 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 cd "$ROOT"
 
+# Windows には「実行しても何もせず正常終了する」python3 スタブ
+# （Microsoft Store 版インストーラへの誘導）が入っていることがある。
+# exit 0 で返るので呼び出し側はエラーに気づけない。実際にこれで
+# check.sh が黙って素通りしていた。バージョンが取れるものを本物とみなす。
+PY=""
+for c in python3 python py; do
+  if command -v "$c" >/dev/null 2>&1 && "$c" -c 'import sys' >/dev/null 2>&1; then
+    PY="$c"; break
+  fi
+done
+if [ -z "$PY" ]; then
+  echo "✗ Python が見つかりません（python3 / python / py のいずれも動きません）" >&2
+  exit 1
+fi
+
 BEFORE="$(mktemp)"
 trap 'rm -f "$BEFORE"' EXIT
 cp index.html "$BEFORE"
 
 echo "▶ 件数表記の同期"
-python3 -X utf8 sync_counts.py
+"$PY" -X utf8 sync_counts.py
 
 if ! cmp -s "$BEFORE" index.html; then
   echo
