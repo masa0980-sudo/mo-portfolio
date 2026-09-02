@@ -194,6 +194,16 @@
     .nav-btn-label { flex: 1; }
     .nav-count { font-family: var(--mono); font-size: 11px; color: var(--dim); }
     .nav-btn.is-active .nav-count { color: var(--muted); }
+    /* 件数の代わりに状態を出したいとき用（公開前のコンテンツなど）。
+       0本の種別に「0」と出すと寂しいので、こちらを使う。 */
+    .nav-badge {
+      font-size: 10px;
+      color: var(--dim);
+      border: 1px solid var(--border-soft);
+      border-radius: 999px;
+      padding: 2px 8px;
+      white-space: nowrap;
+    }
 
     /* 媒体切替。「記事」の子であることが分かるよう、
        左に縦のガイド線を引いて一段下げる。 */
@@ -604,6 +614,14 @@
             data-tab-target="board">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 15a3 3 0 0 1-3 3H8l-4 3V6a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3z"/></svg>
       <span class="nav-btn-label">掲示板</span>
+    </button>
+
+    <button type="button" class="nav-btn tab-btn" id="tab-btn-videos"
+            role="tab" aria-selected="false" aria-controls="tab-panel-videos"
+            data-tab-target="videos">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
+      <span class="nav-btn-label">動画</span>
+      <span class="nav-badge">準備中</span>
     </button>
   </nav>
 
@@ -1327,6 +1345,27 @@
 </section>
 
 </div><!-- /tab-panel: board -->
+
+<div class="tab-panel" data-tab="videos" id="tab-panel-videos" hidden
+     role="tabpanel" aria-labelledby="tab-btn-videos">
+
+<!-- 動画（公開前の枠。URLが決まったら board-cta-btn を1つ足す） -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">🎬 動画</h2>
+    <div class="section-line"></div>
+    <span class="section-count">準備中</span>
+  </div>
+
+  <div class="board-cta">
+    <p class="board-cta-desc">
+      Claude Code の活用や制作の様子を、動画でも発信していく予定です。<br>
+      準備ができ次第ここに掲載します。
+    </p>
+  </div>
+</section>
+
+</div><!-- /tab-panel: videos -->
 
 <div class="tab-panel" data-tab="stamps" id="tab-panel-stamps" hidden
      role="tabpanel" aria-labelledby="tab-btn-stamps">
