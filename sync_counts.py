@@ -7,7 +7,7 @@ index.html 内の件数表記（SEO description・Twitter description・
 サイドバーの nav-count・各セクションの section-count）を、実際のカード数
 から自動算出して同期する。
 
-記事・ゲーム・スタンプのカードを手で追加した後、このスクリプトを実行する
+記事・ゲーム・スタンプ・動画のカードを手で追加した後、このスクリプトを実行する
 だけで全箇所が実数に揃う。過去に「21のまま」「29のまま」と2度、さらに
 ゲームを7本目まで増やしたときにサイドバーだけ6のまま残る、と計3度、
 手動更新を忘れて古い数字が残るバグが発生したための対策。
@@ -28,6 +28,7 @@ TARGET = Path(__file__).resolve().parent / "index.html"
 CARD_RE = re.compile(r'<a class="card reveal"')
 GAME_CARD_RE = re.compile(r'<a class="card reveal game-card"')
 STAMP_CARD_RE = re.compile(r'<a class="card reveal stamp-card"')
+VIDEO_CARD_RE = re.compile(r'<a class="card reveal video-card"')
 
 # 種類ごとの (カードの正規表現, 単数形, 複数形)。
 # section-count の単位と data-sync のキーを、この1箇所から決めている。
@@ -35,6 +36,7 @@ KINDS = {
     "articles": (CARD_RE, "article", "articles"),
     "games": (GAME_CARD_RE, "game", "games"),
     "stamps": (STAMP_CARD_RE, "stamp", "stamps"),
+    "videos": (VIDEO_CARD_RE, "video", "videos"),
 }
 
 # 記事タブの中の媒体別パネル。パネル同士は兄弟要素なので、開始タグで区切って
@@ -45,7 +47,7 @@ SUBTAB_RE = re.compile(r'<div class="subtab-panel" data-subtab="([a-z]+)"')
 
 SECTION_RE = re.compile(r'<section class="section[^"]*">.*?</section>', re.DOTALL)
 SECTION_COUNT_RE = re.compile(
-    r'<span class="section-count">\d+ (?:articles?|games?|stamps?)</span>'
+    r'<span class="section-count">\d+ (?:articles?|games?|stamps?|videos?)</span>'
 )
 
 DESC_RE = re.compile(r'(公開した)\d+(本のAI学習記事)')

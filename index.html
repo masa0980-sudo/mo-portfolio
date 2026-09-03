@@ -340,6 +340,9 @@
 
     /* ゲームカード: サムネイルは中央クロップ、2枚しかないので中央寄せグリッド */
     .game-card .card-thumb { object-position: center; }
+    /* Shorts のサムネイルは中央に縦動画・左右がぼかしの帯という構図なので、
+       上寄せではなく中央基準でクロップする。 */
+    .video-card .card-thumb { object-position: center; }
     .stamp-card .card-thumb {
       aspect-ratio: 1/1;
       object-position: center;
@@ -621,7 +624,7 @@
             data-tab-target="videos">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
       <span class="nav-btn-label">動画</span>
-      <span class="nav-badge">準備中</span>
+      <span class="nav-count" data-sync="videos">1</span>
     </button>
   </nav>
 
@@ -1349,19 +1352,25 @@
 <div class="tab-panel" data-tab="videos" id="tab-panel-videos" hidden
      role="tabpanel" aria-labelledby="tab-btn-videos">
 
-<!-- 動画（公開前の枠。URLが決まったら board-cta-btn を1つ足す） -->
+<!-- 動画（YouTube: masa0980 チャンネル。毎日19時に1本ずつ更新予定） -->
 <section class="section">
   <div class="section-header">
     <h2 class="section-title">🎬 動画</h2>
     <div class="section-line"></div>
-    <span class="section-count">準備中</span>
+    <span class="section-count">1 video</span>
   </div>
 
-  <div class="board-cta">
-    <p class="board-cta-desc">
-      Claude Code の活用や制作の様子を、動画でも発信していく予定です。<br>
-      準備ができ次第ここに掲載します。
-    </p>
+  <div class="grid">
+
+    <a class="card reveal video-card" href="https://www.youtube.com/shorts/2hECTWjTmoc" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/youtube_01_2026-09-03_2hECTWjTmoc.jpg" alt="「AI副業は寝てても稼げる」を会社員が試した結果 サムネイル">
+      <div class="card-body">
+        <span class="card-date">2026-09-03</span>
+        <p class="card-title">【正直に言う】「AI副業は寝てても稼げる」を会社員が試した結果【2026】</p>
+        <span class="card-link">YouTube で見る</span>
+      </div>
+    </a>
+
   </div>
 </section>
 
@@ -1497,6 +1506,8 @@
     <div class="tool-chip">Brain<span>有料記事販売</span></div>
     <div class="tool-chip">Zenn<span>技術記事</span></div>
     <div class="tool-chip">LINE Creators<span>スタンプ申請</span></div>
+    <div class="tool-chip">YouTube<span>動画公開</span></div>
+    <div class="tool-chip">VOICEVOX<span>ナレーション</span></div>
   </div>
 </section>
 
