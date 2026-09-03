@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
+      "Bash(python -X utf8 sync_counts.py)",
       "Bash(python3 -X utf8 sync_counts.py)",
+      "Bash(python -m http.server *)",
       "Bash(python3 -m http.server *)",
       "Bash(.claude/scripts/serve.sh:*)",
       "Bash(.claude/scripts/check.sh)",

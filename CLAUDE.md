@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project
 
-Claude Code 活用ライター MO のポートフォリオサイト。記事・LINEスタンプ・ゲーム・掲示板への
+Claude Code 活用ライター MO のポートフォリオサイト。記事・LINEスタンプ・ゲーム・動画・掲示板への
 導線を1ページにまとめてある。**ビルドステップ・依存パッケージ・テストフレームワークは無い**
 （意図的にそうしている。増やさないこと）。
 
@@ -21,11 +21,16 @@ sync_counts.py    # 件数表記をカードの実数に同期する
 ## Commands
 
 ```bash
-python3 -X utf8 sync_counts.py   # 件数表記の同期(カードを増やしたら必須)
+python -X utf8 sync_counts.py    # 件数表記の同期(カードを増やしたら必須。python3ではなくpython)
 
 .claude/scripts/serve.sh 8935    # ローカル配信
 .claude/scripts/check.sh         # push前の関門(件数がずれていたらエラーで止まる)
 ```
+
+**`python3` は使わない。** Windows には実行しても何もせず exit 0 で返るだけの `python3`
+スタブ（Microsoft Store 版インストーラへの誘導）が入っていることがあり、`command -v python3`
+も終了コードも通ってしまうため、気づかずに「同期したつもり」で古い数字が残る事故が起きた。
+`check.sh` は `python3 → python → py` の順に実際に動くものを探すので、迷ったらこちらを使う。
 
 デプロイは `main` への push だけ。GitHub 内蔵の `pages build and deployment` が走る
 （自前のワークフローファイルは無い）。**別途デプロイコマンドはない。**
@@ -56,7 +61,7 @@ python3 -X utf8 sync_counts.py   # 件数表記の同期(カードを増やし�
 **サイドバーの `nav-count` が6のまま残った**（1回）。
 
 ```bash
-python3 -X utf8 sync_counts.py
+python -X utf8 sync_counts.py
 ```
 
 カードの実数から算出して全箇所を書き換える。集計はカードの class で見分けている。
@@ -66,7 +71,11 @@ python3 -X utf8 sync_counts.py
 | 記事 | `card reveal`（追加クラス無し） | `data-sync="articles"` |
 | ゲーム | `card reveal game-card` | `data-sync="games"` |
 | スタンプ | `card reveal stamp-card` | `data-sync="stamps"` |
+| 動画 | `card reveal video-card` | `data-sync="videos"` |
 | 媒体別 | 記事カードを `subtab-panel` 単位で数える | `data-sync="media-note\|media-brain\|media-zenn"` |
+
+新しい種別を増やすときは `sync_counts.py` の `KINDS` 辞書に1行足すだけでよい
+（動画追加時もこの方法で対応した。JS側の変更は不要）。
 
 媒体別の合計が記事総数と食い違ったときも `WARN:` で知らせる（実際に
 note 43 / Brain 2 / Zenn 1 = 46 なのに総数 50、という不一致が起きたことがある）。
@@ -95,10 +104,16 @@ legacy は更新しない。`sync_counts.py` の対象もルートの `index.htm
 
 ## 注意点
 
-- **このサンドボックスからは `*.github.io` に到達できない。** 公開URLでの表示確認は不可能なので、
-  ローカルで確認したうえで**「公開URLでの実表示は未確認」と明示する**こと。
-  到達できなかったことを、確認できたことにしない。
-- ゲームのサムネイルは公開URLからは撮れない。**そのゲームのリポジトリをローカルで配信して撮る。**
+- **外部サイトへの到達可否はセッションによって変わる（2026-09-03 更新）。** 以前は
+  「`*.github.io` に到達できない」としていたが、`urllib`・`WebFetch`・Playwright の
+  `page.goto` のいずれも `*.github.io` / `youtube.com` / `zenn.dev` / `brain-market.com`
+  に届いた実績がある。**まず直接アクセスを試し、失敗したときだけ**ゲームはローカル配信して
+  撮る・「公開URLでの実表示は未確認」と明示する、に切り替える。
+- **外部リンクを足す前に実データで裏取りする。** ユーザーから渡されたURLをそのまま
+  信用しない。動画1本のURLとチャンネルのURLを混同しかけたことがある。YouTubeなら
+  チャンネルのRSSフィード（`https://www.youtube.com/feeds/videos.xml?channel_id=<ID>`）で
+  動画ID・タイトル・公開日を確認してから使う。JS描画されたHTMLをWebFetchや正規表現で
+  読むと、実データではなくUIの固定文言を拾って誤判定することがある。
 - **Actions API のジョブ状態は数分古いまま返ることがある。** 進んでいないように見えても
   すぐに cancel / rerun せず、数分待って取り直す。最終判断は `get_job_logs` の実ログ
   （`Evaluated environment url: ...` が出ていれば成功）。
