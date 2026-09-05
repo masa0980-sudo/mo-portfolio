@@ -46,7 +46,7 @@ YouTube動画のサムネイルは `https://i3.ytimg.com/vi/<video_id>/maxresdef
 種別ごとに class が違う。**この class が件数の集計キーになっている**ので、勝手に変えないこと。
 
 ```html
-<!-- 記事 -->
+<!-- 記事（note.comの場合は3.5節のdata-magazine属性も参照） -->
 <a class="card reveal" href="..." target="_blank" rel="noopener noreferrer">
 
 <!-- ゲーム -->
@@ -82,6 +82,52 @@ URLをそのまま信用しない。実際に「動画1本のURL」と「チャ�
 で動画ID・タイトル・公開日・チャンネル名を確認してから使った。JS描画されたYouTubeのHTMLを
 `WebFetch`や正規表現で読もうとしても、実データではなくUIの固定文言（「キーボード
 ショートカット」等）を拾ってしまい信用できない。**RSSフィードなら確実**。
+
+### note記事には data-magazine 属性が必須（2026-09-05〜）
+
+noteタブは「🕒 時系列 / 🗂 マガジン別 / 💎 有料記事」の3モードを切り替えられる作りになっている
+（`initNoteView`、記事タブ内・note媒体パネルのみ）。マガジン別モードはカードの
+`data-magazine="<マガジンkey>"` 属性を見て絞り込むので、**新しいnote記事を足すときは
+このマガジンkeyの特定も同時に必要**。飛ばすと「時系列」には出るが「マガジン別」の
+どのチップを選んでも出てこない、という見た目に気づきにくい抜けになる。
+
+マガジンkeyは記事本文APIの `belonging_magazine_keys` で取れる。
+
+```bash
+curl -s "https://note.com/api/v3/notes/<記事key>" | python -c "
+import json,sys
+print(json.load(sys.stdin)['data']['belonging_magazine_keys'])
+"
+```
+
+**複数マガジンに所属することがある**（実績: 55記事中6記事）。その場合は
+`data-magazine="key1 key2"` のように半角スペース区切りで両方書く。
+
+**マガジンに1つも属さない記事もある**（新規記事をまだどのマガジンにも入れていない場合）。
+その場合は `data-magazine` 属性自体を付けない（空文字にしない）。時系列モードには出るが、
+マガジン別モードのどのチップにも出ない状態になる——これは正しい挙動。
+
+**返ってくるkeyの中に、7マガジン一覧（`note.com/api/v2/creators/mo0980/contents?kind=magazine`）
+に存在しない古いkeyが混ざることがある**（実績: 5個）。過去にリネーム・統合されたマガジンの
+残骸と見られ、必ず生きているマガジンのkeyと一緒に出てくる。**7マガジン一覧に無いkeyは無視し、
+一覧にある方だけを使う**。
+
+現在の7マガジンとkeyの対応（サイドバー実装時点、`index.html` の `.magazine-chip` 参照）:
+
+| マガジン名 | key |
+|---|---|
+| Claude Code 実践ラボ | `mea086c047f4f` |
+| Claude 最新モデル追跡 | `m9ed6b4fd14c1` |
+| AIニュース・セキュリティ | `mcfbd7faa8d47` |
+| AIで作って売る（実践） | `me39434a23b8c` |
+| Claude Code はじめの一歩 | `mfa775ffb29da` |
+| Claude Codeでゲームを作ってみた | `mc8ba0eb364d8` |
+| AIで遊ぼう編 | `m585ab7bd6a87` |
+
+新しいマガジンを note.com 側で作った場合は、`.note-magazine-chips` 内に
+`<button class="magazine-chip" data-magazine-target="<key>">名前<span class="magazine-chip-count">件数</span></button>`
+を1行足す（`sync_counts.py` は関与しないので手作業。件数はチップの表示用の目安であり、
+実際の絞り込みは `data-magazine` 属性の一致で行われるため多少ズレても実害はない）。
 
 ## 3. 件数を同期する（必須）
 

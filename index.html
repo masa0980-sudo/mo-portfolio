@@ -338,6 +338,44 @@
     .tab-panel[hidden] { display: none; }
     .subtab-panel[hidden] { display: none; }
 
+    /* note記事の表示切替（時系列 / マガジン別 / 有料記事） */
+    .note-view-switch {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin: 4px 0 18px;
+    }
+    .note-view-btn {
+      font-family: inherit; font-size: 12.5px; color: var(--muted);
+      background: transparent; border: 1px solid var(--border-soft);
+      border-radius: 7px; padding: 7px 14px; cursor: pointer;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .note-view-btn:hover { color: var(--text); border-color: var(--muted); }
+    .note-view-btn.is-active {
+      color: #cbd5f0; background: var(--card-hi); border-color: #2f3646;
+    }
+    .note-magazine-chips {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin: -6px 0 18px;
+    }
+    .note-magazine-chips[hidden] { display: none; }
+    .magazine-chip {
+      font-family: inherit; font-size: 12px; color: var(--muted);
+      background: transparent; border: 1px solid var(--border-soft);
+      border-radius: 999px; padding: 6px 12px; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: color 0.18s, border-color 0.18s, background 0.18s;
+    }
+    .magazine-chip:hover { color: var(--text); border-color: var(--muted); }
+    .magazine-chip.is-active {
+      color: #cbd5f0; background: var(--card-hi); border-color: var(--accent);
+    }
+    .magazine-chip-count {
+      font-size: 10.5px; color: var(--dim);
+      background: var(--bg); border-radius: 999px; padding: 1px 6px;
+    }
+    .magazine-chip.is-active .magazine-chip-count { color: var(--accent2); }
+    .card.is-note-hidden { display: none; }
+
     /* ゲームカード: サムネイルは中央クロップ、2枚しかないので中央寄せグリッド */
     .game-card .card-thumb { object-position: center; }
     /* Shorts のサムネイルは中央に縦動画・左右がぼかしの帯という構図なので、
@@ -664,79 +702,32 @@
 <div class="subtab-panel" data-subtab="note" id="subtab-panel-note"
      role="tabpanel" aria-labelledby="subtab-btn-note">
 
-<!-- 有料記事 -->
+<div class="note-view-switch" role="group" aria-label="note記事の表示切替">
+  <button type="button" class="note-view-btn is-active" data-note-view="chrono">🕒 時系列</button>
+  <button type="button" class="note-view-btn" data-note-view="magazine">🗂 マガジン別</button>
+  <button type="button" class="note-view-btn" data-note-view="paid">💎 有料記事</button>
+</div>
+
+<div class="note-magazine-chips" hidden role="group" aria-label="マガジンを選択">
+      <button type="button" class="magazine-chip" data-magazine-target="mea086c047f4f">Claude Code 実践ラボ<span class="magazine-chip-count">15</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="m9ed6b4fd14c1">Claude 最新モデル追跡<span class="magazine-chip-count">12</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="mcfbd7faa8d47">AIニュース・セキュリティ<span class="magazine-chip-count">11</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="me39434a23b8c">AIで作って売る（実践）<span class="magazine-chip-count">8</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="mfa775ffb29da">Claude Code はじめの一歩<span class="magazine-chip-count">7</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="mc8ba0eb364d8">Claude Codeでゲームを作ってみた<span class="magazine-chip-count">4</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="m585ab7bd6a87">AIで遊ぼう編<span class="magazine-chip-count">3</span></button>
+</div>
+
 <section class="section">
   <div class="section-header">
-    <h2 class="section-title">💎 有料記事</h2>
+    <h2 class="section-title">📝 note.com 記事</h2>
     <div class="section-line"></div>
-    <span class="section-count">1 article</span>
+    <span class="section-count">55 articles</span>
   </div>
 
   <div class="grid">
 
-    <a class="card reveal" href="https://note.com/mo0980/n/n0345edfffb17" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_21_2026-06-24_n0345edfffb17.png" alt="AI LINEスタンプ 量産 全手順">
-      <div class="card-body">
-        <span class="card-date">2026-06-24</span>
-        <p class="card-title">絵が描けなくてもOK。AIで売れるLINEスタンプを画像1枚から量産する全手順</p>
-        <span class="card-link card-link--paid">💎 有料（770円）・note で読む</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- AIで遊ぼう編 -->
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title">🎮 AIで遊ぼう編</h2>
-    <div class="section-line"></div>
-    <span class="section-count">3 articles</span>
-  </div>
-
-  <div class="grid">
-
-    <a class="card reveal" href="https://note.com/mo0980/n/na84d6b2d955b" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_18_2026-06-20_na84d6b2d955b.png" alt="AIエージェント iPhone vs Android 論戦">
-      <div class="card-body">
-        <span class="card-date">2026-06-20</span>
-        <p class="card-title">[AIで遊ぼう編] AIエージェント2体に「iPhone vs Android」を本気で論戦させてみた</p>
-        <span class="card-link">note で読む</span>
-      </div>
-    </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n6c0e00073887" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_19_2026-06-19_n6c0e00073887.png" alt="AIエージェント 猫派 vs 犬派 論戦">
-      <div class="card-body">
-        <span class="card-date">2026-06-19</span>
-        <p class="card-title">[AIで遊ぼう編] AIエージェント2体に「猫派 vs 犬派」を本気で論戦させてみた</p>
-        <span class="card-link">note で読む</span>
-      </div>
-    </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n239fea3e664f" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_20_2026-06-17_n239fea3e664f.png" alt="AI同士 きのこたけのこ論争 ガチ論戦">
-      <div class="card-body">
-        <span class="card-date">2026-06-17</span>
-        <p class="card-title">[AIで遊ぼう編] AI同士にきのこたけのこ論争をガチ論戦させたら、想像以上に白熱した話</p>
-        <span class="card-link">note で読む</span>
-      </div>
-    </a>
-
-  </div>
-</section>
-
-<!-- note.com 公開記事 -->
-<section class="section">
-  <div class="section-header">
-    <h2 class="section-title">📝 note.com 公開記事</h2>
-    <div class="section-line"></div>
-    <span class="section-count">51 articles</span>
-  </div>
-
-  <div class="grid">
-
-    <a class="card reveal" href="https://note.com/mo0980/n/ne0df39ff7553" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/ne0df39ff7553" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_54_2026-09-05_ne0df39ff7553.png" alt="Claude CodeでYouTube動画を作って分かった3つの誤算">
       <div class="card-body">
         <span class="card-date">2026-09-05</span>
@@ -744,7 +735,6 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
     <a class="card reveal" href="https://note.com/mo0980/n/nee04d3338870" target="_blank" rel="noopener noreferrer">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_55_2026-09-04_nee04d3338870.png" alt="Claude Codeのスキルを初めて自作してわかった作り方の基本">
       <div class="card-body">
@@ -753,8 +743,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nc0111e09d726" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nc0111e09d726" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_52_2026-09-02_nc0111e09d726.png" alt="Claude Fable 5.1公開、Fable 5から何が変わったか">
       <div class="card-body">
         <span class="card-date">2026-09-02</span>
@@ -762,8 +751,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n5511a483eb13" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n5511a483eb13" target="_blank" rel="noopener noreferrer" data-magazine="mc8ba0eb364d8">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_53_2026-09-02_n5511a483eb13.png" alt="ブラウザゲームのBGM途切れを追ったら、犯人は音声ではなかった話">
       <div class="card-body">
         <span class="card-date">2026-09-02</span>
@@ -771,8 +759,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n082d7647738c" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n082d7647738c" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_51_2026-08-31_n082d7647738c.png" alt="LINEアニメスタンプを1枚の原画から作ってみた話">
       <div class="card-body">
         <span class="card-date">2026-08-31</span>
@@ -780,8 +767,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nbb1b87a04f38" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nbb1b87a04f38" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_50_2026-08-30_nbb1b87a04f38.png" alt="Anthropic著作権訴訟、15億ドル和解の中身とは？2つの争点">
       <div class="card-body">
         <span class="card-date">2026-08-30</span>
@@ -789,8 +775,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n73c496cd7677" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n73c496cd7677" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_49_2026-08-30_n73c496cd7677.png" alt="AIエージェントが隔離環境を突破｜OpenAI報告書に学ぶ対策">
       <div class="card-body">
         <span class="card-date">2026-08-30</span>
@@ -798,8 +783,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nceceea1b3f05" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nceceea1b3f05" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_48_2026-08-29_nceceea1b3f05.png" alt="Obsidianのfrontmatterで記事ステータスを一元管理する方法">
       <div class="card-body">
         <span class="card-date">2026-08-29</span>
@@ -807,8 +791,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/neb85d55335ef" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/neb85d55335ef" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_47_2026-08-27_neb85d55335ef.png" alt="米中AI競争の現在地｜性能差2.7%とAI2040が示す5つの道筋">
       <div class="card-body">
         <span class="card-date">2026-08-27</span>
@@ -816,8 +799,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n5a01d99dbec7" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n5a01d99dbec7" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_46_2026-08-27_n5a01d99dbec7.png" alt="Claude Designでできること5選｜デザイン経験ゼロから使える">
       <div class="card-body">
         <span class="card-date">2026-08-27</span>
@@ -825,8 +807,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nf425d375896c" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nf425d375896c" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_45_2026-08-24_nf425d375896c.png" alt="Claude Codeの成果物をGitHub Pagesで無料公開">
       <div class="card-body">
         <span class="card-date">2026-08-24</span>
@@ -834,8 +815,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nbe9454f9eb9a" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nbe9454f9eb9a" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_44_2026-08-23_nbe9454f9eb9a.png" alt="Claude Codeでブログ制作の進捗ダッシュボードを作ってみた">
       <div class="card-body">
         <span class="card-date">2026-08-23</span>
@@ -843,8 +823,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n2b17e64f4599" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n2b17e64f4599" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_43_2026-08-20_n2b17e64f4599.png" alt="Claude Codeで自分専用の音声入力アプリを作ってみた">
       <div class="card-body">
         <span class="card-date">2026-08-20</span>
@@ -852,8 +831,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nfba24dcf9cf4" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nfba24dcf9cf4" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_42_2026-08-19_nfba24dcf9cf4.png" alt="Claude Codeで家族の写真アルバムを自動生成してみた">
       <div class="card-body">
         <span class="card-date">2026-08-19</span>
@@ -861,8 +839,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n92d3e219de0b" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n92d3e219de0b" target="_blank" rel="noopener noreferrer" data-magazine="mc8ba0eb364d8">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_41_2026-08-16_n92d3e219de0b.png" alt="Claude Codeでゲームにランキング機能を追加した話">
       <div class="card-body">
         <span class="card-date">2026-08-16</span>
@@ -870,8 +847,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n7da74a6e2c68" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n7da74a6e2c68" target="_blank" rel="noopener noreferrer" data-magazine="mc8ba0eb364d8">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_40_2026-08-15_n7da74a6e2c68.png" alt="Claude Codeでゲームにキーアート画像をつけた体験談">
       <div class="card-body">
         <span class="card-date">2026-08-15</span>
@@ -879,8 +855,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nb4ad6041cda5" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nb4ad6041cda5" target="_blank" rel="noopener noreferrer" data-magazine="mc8ba0eb364d8">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_39_2026-08-12_nb4ad6041cda5.png" alt="Claude Codeでゲーム制作を始める方法">
       <div class="card-body">
         <span class="card-date">2026-08-12</span>
@@ -888,8 +863,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n659e625d12d7" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n659e625d12d7" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_38_2026-08-08_n659e625d12d7.png" alt="Claude Codeはスマホだけで使えるのか徹底検証">
       <div class="card-body">
         <span class="card-date">2026-08-08</span>
@@ -897,8 +871,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n705eb9b8dec0" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n705eb9b8dec0" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_37_2026-08-05_n705eb9b8dec0.png" alt="Claude Codeで動画制作をフルAI化する設計図">
       <div class="card-body">
         <span class="card-date">2026-08-05</span>
@@ -906,8 +879,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nfefa8c0fbdd1" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nfefa8c0fbdd1" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_36_2026-08-01_nfefa8c0fbdd1.png" alt="ニチレイ障害その後 RansomHouseの脅威と教訓">
       <div class="card-body">
         <span class="card-date">2026-08-01</span>
@@ -915,8 +887,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n3d2bce216d20" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n3d2bce216d20" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_35_2026-08-01_n3d2bce216d20.png" alt="Claude Codeで失敗しない設計法">
       <div class="card-body">
         <span class="card-date">2026-08-01</span>
@@ -924,8 +895,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n87f32e8dbfbd" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n87f32e8dbfbd" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_34_2026-07-29_n87f32e8dbfbd.png" alt="Claude CodeとCodexを徹底比較">
       <div class="card-body">
         <span class="card-date">2026-07-29</span>
@@ -933,8 +903,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/ne3372d0a1baa" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/ne3372d0a1baa" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_33_2026-07-25_ne3372d0a1baa.png" alt="Claude Opus 5公開！Opus 4.8から何が変わった">
       <div class="card-body">
         <span class="card-date">2026-07-25</span>
@@ -942,8 +911,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n5753b1de5c0c" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n5753b1de5c0c" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_32_2026-07-25_n5753b1de5c0c.png" alt="Claude Codeでスキルと相棒AIを作ってみよう">
       <div class="card-body">
         <span class="card-date">2026-07-25</span>
@@ -951,8 +919,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n661d8ec260c2" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n661d8ec260c2" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_31_2026-07-24_n661d8ec260c2.png" alt="Claude Codeの基本操作に慣れよう">
       <div class="card-body">
         <span class="card-date">2026-07-24</span>
@@ -960,8 +927,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n1ca5cd34ed10" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n1ca5cd34ed10" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_30_2026-07-22_n1ca5cd34ed10.png" alt="Claude利用制限が一時緩和中">
       <div class="card-body">
         <span class="card-date">2026-07-22</span>
@@ -969,8 +935,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nfaf3e35648ef" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nfaf3e35648ef" target="_blank" rel="noopener noreferrer" data-magazine="mfa775ffb29da">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_29_2026-07-19_nfaf3e35648ef.png" alt="Claude Codeを今日から始める完全ガイド">
       <div class="card-body">
         <span class="card-date">2026-07-19</span>
@@ -978,8 +943,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/necc6be236abf" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/necc6be236abf" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_28_2026-07-16_necc6be236abf.png" alt="ニチレイ障害に学ぶサプライチェーン攻撃リスク">
       <div class="card-body">
         <span class="card-date">2026-07-16</span>
@@ -987,8 +951,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nb2f1ef60f65d" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nb2f1ef60f65d" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_27_2026-07-11_nb2f1ef60f65d.png" alt="Claude Code×Obsidian 3拠点運用">
       <div class="card-body">
         <span class="card-date">2026-07-11</span>
@@ -996,8 +959,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n691d8ed3b742" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n691d8ed3b742" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_26_2026-07-10_n691d8ed3b742.png" alt="Claude Fable 5 無料期限">
       <div class="card-body">
         <span class="card-date">2026-07-10</span>
@@ -1005,8 +967,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nc1cca0f4ff63" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nc1cca0f4ff63" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_25_2026-07-03_nc1cca0f4ff63.png" alt="Claude Fable 5 再開">
       <div class="card-body">
         <span class="card-date">2026-07-03</span>
@@ -1014,8 +975,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/ne1bafdbc0ecf" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/ne1bafdbc0ecf" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_22_2026-07-02_ne1bafdbc0ecf.png" alt="Claude Sonnet 5 解説">
       <div class="card-body">
         <span class="card-date">2026-07-02</span>
@@ -1023,8 +983,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n49e8e93b82a4" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n49e8e93b82a4" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1 mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_23_2026-07-02_n49e8e93b82a4.png" alt="Claude Mythos AI格差">
       <div class="card-body">
         <span class="card-date">2026-07-02</span>
@@ -1032,8 +991,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n98f24ac636b8" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n98f24ac636b8" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_24_2026-07-02_n98f24ac636b8.png" alt="Claude Code 完全自動化 5ステップ">
       <div class="card-body">
         <span class="card-date">2026-07-02</span>
@@ -1041,8 +999,39 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nc6e197809dfe" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n0345edfffb17" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_21_2026-06-24_n0345edfffb17.png" alt="AI LINEスタンプ 量産 全手順">
+      <div class="card-body">
+        <span class="card-date">2026-06-24</span>
+        <p class="card-title">絵が描けなくてもOK。AIで売れるLINEスタンプを画像1枚から量産する全手順</p>
+        <span class="card-link card-link--paid">💎 有料（770円）・note で読む</span>
+      </div>
+    </a>
+    <a class="card reveal" href="https://note.com/mo0980/n/na84d6b2d955b" target="_blank" rel="noopener noreferrer" data-magazine="m585ab7bd6a87">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_18_2026-06-20_na84d6b2d955b.png" alt="AIエージェント iPhone vs Android 論戦">
+      <div class="card-body">
+        <span class="card-date">2026-06-20</span>
+        <p class="card-title">[AIで遊ぼう編] AIエージェント2体に「iPhone vs Android」を本気で論戦させてみた</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+    <a class="card reveal" href="https://note.com/mo0980/n/n6c0e00073887" target="_blank" rel="noopener noreferrer" data-magazine="m585ab7bd6a87">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_19_2026-06-19_n6c0e00073887.png" alt="AIエージェント 猫派 vs 犬派 論戦">
+      <div class="card-body">
+        <span class="card-date">2026-06-19</span>
+        <p class="card-title">[AIで遊ぼう編] AIエージェント2体に「猫派 vs 犬派」を本気で論戦させてみた</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+    <a class="card reveal" href="https://note.com/mo0980/n/n239fea3e664f" target="_blank" rel="noopener noreferrer" data-magazine="m585ab7bd6a87">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/note_20_2026-06-17_n239fea3e664f.png" alt="AI同士 きのこたけのこ論争 ガチ論戦">
+      <div class="card-body">
+        <span class="card-date">2026-06-17</span>
+        <p class="card-title">[AIで遊ぼう編] AI同士にきのこたけのこ論争をガチ論戦させたら、想像以上に白熱した話</p>
+        <span class="card-link">note で読む</span>
+      </div>
+    </a>
+    <a class="card reveal" href="https://note.com/mo0980/n/nc6e197809dfe" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_17_2026-06-15_nc6e197809dfe.png" alt="Gmail GitHub Actions 自動化">
       <div class="card-body">
         <span class="card-date">2026-06-15</span>
@@ -1050,8 +1039,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n5b72b7c11cfb" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n5b72b7c11cfb" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_15_2026-06-13_n5b72b7c11cfb.png" alt="Claude Fable 5 提供停止">
       <div class="card-body">
         <span class="card-date">2026-06-13</span>
@@ -1059,8 +1047,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/na2486669f245" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/na2486669f245" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_16_2026-06-13_na2486669f245.png" alt="Claude Code 業務効率化">
       <div class="card-body">
         <span class="card-date">2026-06-13</span>
@@ -1068,8 +1055,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n32ada461305a" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n32ada461305a" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_01_2026-06-10_n32ada461305a.png" alt="Claude Fable 5">
       <div class="card-body">
         <span class="card-date">2026-06-10</span>
@@ -1077,8 +1063,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n3a9539dc5c72" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n3a9539dc5c72" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_02_2026-06-06_n3a9539dc5c72.png" alt="LINEスタンプ 単体">
       <div class="card-body">
         <span class="card-date">2026-06-06</span>
@@ -1086,8 +1071,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n9c5b1c795925" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n9c5b1c795925" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_03_2026-06-06_n9c5b1c795925.png" alt="LINEスタンプ 第3部">
       <div class="card-body">
         <span class="card-date">2026-06-06</span>
@@ -1095,8 +1079,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n490891468963" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n490891468963" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_04_2026-06-06_n490891468963.png" alt="LINEスタンプ 第2部">
       <div class="card-body">
         <span class="card-date">2026-06-06</span>
@@ -1104,8 +1087,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n42ab971357bf" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n42ab971357bf" target="_blank" rel="noopener noreferrer" data-magazine="me39434a23b8c">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_05_2026-06-06_n42ab971357bf.png" alt="LINEスタンプ 第1部">
       <div class="card-body">
         <span class="card-date">2026-06-06</span>
@@ -1113,8 +1095,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nbf02ca4eaf1f" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nbf02ca4eaf1f" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_06_2026-06-03_nbf02ca4eaf1f.png" alt="Claude Code Obsidian NotebookLM">
       <div class="card-body">
         <span class="card-date">2026-06-03</span>
@@ -1122,8 +1103,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/nef9622a641ec" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nef9622a641ec" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_07_2026-06-02_nef9622a641ec.png" alt="Claude Code Obsidian">
       <div class="card-body">
         <span class="card-date">2026-06-02</span>
@@ -1131,8 +1111,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n8df08426fae6" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n8df08426fae6" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_08_2026-05-30_n8df08426fae6.png" alt="Claude Opus 4.8">
       <div class="card-body">
         <span class="card-date">2026-05-30</span>
@@ -1140,8 +1119,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/ncb331db999f2" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/ncb331db999f2" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_09_2026-05-29_ncb331db999f2.png" alt="Claude Code 自動化">
       <div class="card-body">
         <span class="card-date">2026-05-29</span>
@@ -1149,8 +1127,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n5a46008ebb75" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n5a46008ebb75" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_10_2026-05-28_n5a46008ebb75.png" alt="生成AI仕組み">
       <div class="card-body">
         <span class="card-date">2026-05-28</span>
@@ -1158,8 +1135,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n66eca0928021" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n66eca0928021" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1 mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_11_2026-05-27_n66eca0928021.png" alt="Claude Mythos AI脅威">
       <div class="card-body">
         <span class="card-date">2026-05-27</span>
@@ -1167,8 +1143,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n90df2191f589" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n90df2191f589" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_12_2026-05-25_n90df2191f589.png" alt="AIエージェント入門">
       <div class="card-body">
         <span class="card-date">2026-05-25</span>
@@ -1176,8 +1151,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n2252f2188d88" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n2252f2188d88" target="_blank" rel="noopener noreferrer" data-magazine="m9ed6b4fd14c1 mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_13_2026-05-23_n2252f2188d88.png" alt="Claude Mythos 中小企業">
       <div class="card-body">
         <span class="card-date">2026-05-23</span>
@@ -1185,8 +1159,7 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
-    <a class="card reveal" href="https://note.com/mo0980/n/n901c2b701947" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/n901c2b701947" target="_blank" rel="noopener noreferrer" data-magazine="mcfbd7faa8d47">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_14_2026-05-23_n901c2b701947.png" alt="AIエージェント未来">
       <div class="card-body">
         <span class="card-date">2026-05-23</span>
@@ -1194,7 +1167,6 @@
         <span class="card-link">note で読む</span>
       </div>
     </a>
-
   </div>
 </section>
 
@@ -1676,6 +1648,60 @@
   })();
 
   /**
+   * note記事の表示切替（時系列 / マガジン別 / 有料記事）。
+   * カードの並び順・data-magazine属性はDOMを直接見るだけで、JS側に
+   * 記事の配列は持たない（他のカードと同じ設計方針）。
+   */
+  (function initNoteView() {
+    const panel = document.getElementById('subtab-panel-note');
+    if (!panel) return;
+
+    const viewBtns = panel.querySelectorAll('.note-view-btn[data-note-view]');
+    const chipsWrap = panel.querySelector('.note-magazine-chips');
+    const chips = panel.querySelectorAll('.magazine-chip[data-magazine-target]');
+    const cards = Array.from(panel.querySelectorAll('.card'));
+
+    let view = 'chrono';
+    let magazine = chips.length ? chips[0].dataset.magazineTarget : null;
+
+    function apply() {
+      chipsWrap.hidden = view !== 'magazine';
+
+      cards.forEach(function (card) {
+        let show = true;
+        if (view === 'paid') {
+          show = !!card.querySelector('.card-link--paid');
+        } else if (view === 'magazine') {
+          const mags = (card.dataset.magazine || '').split(' ');
+          show = mags.indexOf(magazine) !== -1;
+        }
+        card.classList.toggle('is-note-hidden', !show);
+      });
+
+      chips.forEach(function (chip) {
+        chip.classList.toggle('is-active', view === 'magazine' && chip.dataset.magazineTarget === magazine);
+      });
+    }
+
+    viewBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        view = btn.dataset.noteView;
+        viewBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+        apply();
+      });
+    });
+
+    chips.forEach(function (chip) {
+      chip.addEventListener('click', function () {
+        magazine = chip.dataset.magazineTarget;
+        apply();
+      });
+    });
+
+    apply();
+  })();
+
+  /**
    * 検索と絞り込み。カードを直接見て判定するので、記事を足しても
    * ここを書き換える必要はない（HTMLに1枚足せば検索対象に入る）。
    */
@@ -1722,7 +1748,7 @@
         // stamp-card は .stamp-card-wrap に包まれているので、その親ごと隠す
         const target = e.el.closest('.stamp-card-wrap') || e.el;
         target.classList.toggle('is-filtered', !ok);
-        if (ok) hits++;
+        if (ok && !e.el.classList.contains('is-note-hidden')) hits++;
       });
 
       // 中身が全部消えたセクションは見出しごと隠す
@@ -1731,7 +1757,9 @@
         if (!total) return;
         const shown = Array.prototype.filter.call(
           section.querySelectorAll('.card'),
-          function (c) { return !(c.closest('.stamp-card-wrap') || c).classList.contains('is-filtered'); }
+          function (c) {
+            return !(c.closest('.stamp-card-wrap') || c).classList.contains('is-filtered') && !c.classList.contains('is-note-hidden');
+          }
         ).length;
         section.classList.toggle('is-empty', shown === 0);
       });
