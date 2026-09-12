@@ -192,6 +192,8 @@
     }
     .nav-btn svg { flex-shrink: 0; }
     .nav-btn-label { flex: 1; }
+    a.nav-btn { text-decoration: none; box-sizing: border-box; }
+    .nav-group--admin { margin-top: 6px; padding-top: 8px; border-top: 1px solid var(--border); }
     .nav-count { font-family: var(--mono); font-size: 11px; color: var(--dim); }
     .nav-btn.is-active .nav-count { color: var(--muted); }
     /* 件数の代わりに状態を出したいとき用（公開前のコンテンツなど）。
@@ -666,6 +668,12 @@
     </button>
   </nav>
 
+  <div class="nav-group nav-group--admin">
+    <a class="nav-btn" href="https://mo-vault.taila045e4.ts.net/" target="_blank" rel="noopener noreferrer">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+      <span class="nav-btn-label">管理者用</span>
+    </a>
+  </div>
 
   <div class="sidebar-foot">SINCE 2026<br>MAIN: CLAUDE CODE</div>
 </aside>
