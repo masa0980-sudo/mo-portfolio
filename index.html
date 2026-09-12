@@ -6,7 +6,7 @@
   <title>MO | AI活用ポートフォリオ｜Claude Code 活用ライター</title>
 
   <!-- SEO -->
-  <meta name="description" content="MO のAI活用ポートフォリオ。Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した64本のAI学習記事をまとめています。">
+  <meta name="description" content="MO のAI活用ポートフォリオ。Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した65本のAI学習記事をまとめています。">
   <meta name="author" content="MO">
   <meta name="keywords" content="MO, Claude Code, AI, 生成AI, 自動化, note, ポートフォリオ, AIライター">
   <meta name="robots" content="index, follow">
@@ -31,7 +31,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="MO | AI活用ポートフォリオ">
   <meta property="og:title" content="MO | AI活用ポートフォリオ｜Claude Code 活用ライター">
-  <meta property="og:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した64本のAI学習記事をまとめたポートフォリオ。">
+  <meta property="og:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn で公開した65本のAI学習記事をまとめたポートフォリオ。">
   <meta property="og:url" content="https://masa0980-sudo.github.io/mo-portfolio/">
   <meta property="og:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
   <meta property="og:image:width" content="1200">
@@ -41,7 +41,7 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="MO | AI活用ポートフォリオ">
-  <meta name="twitter:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn の64記事をまとめたポートフォリオ。">
+  <meta name="twitter:description" content="Claude Code を使ったコンテンツ制作・業務自動化の実践と、note.com・Brain・Zenn の65記事をまとめたポートフォリオ。">
   <meta name="twitter:image" content="https://masa0980-sudo.github.io/mo-portfolio/img/ogp.png">
 
   <!-- 構造化データ -->
@@ -341,18 +341,18 @@
     .subtab-panel[hidden] { display: none; }
 
     /* note記事の表示切替（時系列 / マガジン別 / 有料記事） */
-    .note-view-switch {
+    .note-view-switch, .video-view-switch {
       display: flex; gap: 8px; flex-wrap: wrap;
       margin: 4px 0 18px;
     }
-    .note-view-btn {
+    .note-view-btn, .video-view-btn {
       font-family: inherit; font-size: 12.5px; color: var(--muted);
       background: transparent; border: 1px solid var(--border-soft);
       border-radius: 7px; padding: 7px 14px; cursor: pointer;
       transition: color 0.18s, border-color 0.18s, background 0.18s;
     }
-    .note-view-btn:hover { color: var(--text); border-color: var(--muted); }
-    .note-view-btn.is-active {
+    .note-view-btn:hover, .video-view-btn:hover { color: var(--text); border-color: var(--muted); }
+    .note-view-btn.is-active, .video-view-btn.is-active {
       color: #cbd5f0; background: var(--card-hi); border-color: #2f3646;
     }
     .note-magazine-chips {
@@ -360,6 +360,7 @@
       margin: -6px 0 18px;
     }
     .note-magazine-chips[hidden] { display: none; }
+    .video-group[hidden] { display: none; }
     .magazine-chip {
       font-family: inherit; font-size: 12px; color: var(--muted);
       background: transparent; border: 1px solid var(--border-soft);
@@ -607,7 +608,7 @@
             data-tab-target="articles">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h11l5 5v11H4z"/><path d="M15 4v5h5"/><path d="M8 13h8M8 17h6"/></svg>
       <span class="nav-btn-label">記事</span>
-      <span class="nav-count" data-sync="articles">64</span>
+      <span class="nav-count" data-sync="articles">65</span>
     </button>
 
     <div class="nav-media" id="nav-media" role="group" aria-label="掲載媒体の切り替え">
@@ -624,7 +625,7 @@
               data-subtab-target="brain">
         <span class="media-dot" style="background:#f0a35e"></span>
         <span class="media-btn-label">Brain</span>
-        <span class="nav-count" data-sync="media-brain">2</span>
+        <span class="nav-count" data-sync="media-brain">3</span>
       </button>
 
       <button type="button" class="media-btn subtab-btn" id="subtab-btn-zenn"
@@ -641,7 +642,7 @@
             data-tab-target="stamps">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="9" cy="10" r="1.2"/><circle cx="15" cy="10" r="1.2"/><path d="M8.5 14.5c1.8 1.6 5.2 1.6 7 0"/></svg>
       <span class="nav-btn-label">スタンプ</span>
-      <span class="nav-count" data-sync="stamps">10</span>
+      <span class="nav-count" data-sync="stamps">11</span>
     </button>
 
     <button type="button" class="nav-btn tab-btn" id="tab-btn-games"
@@ -657,7 +658,7 @@
             data-tab-target="videos">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
       <span class="nav-btn-label">動画</span>
-      <span class="nav-count" data-sync="videos">8</span>
+      <span class="nav-count" data-sync="videos">9</span>
     </button>
 
     <button type="button" class="nav-btn tab-btn" id="tab-btn-board"
@@ -717,7 +718,7 @@
 </div>
 
 <div class="note-magazine-chips" hidden role="group" aria-label="マガジンを選択">
-      <button type="button" class="magazine-chip" data-magazine-target="mea086c047f4f">Claude Code 実践ラボ<span class="magazine-chip-count">15</span></button>
+      <button type="button" class="magazine-chip" data-magazine-target="mea086c047f4f">Claude Code 実践ラボ<span class="magazine-chip-count">16</span></button>
       <button type="button" class="magazine-chip" data-magazine-target="m9ed6b4fd14c1">Claude 最新モデル追跡<span class="magazine-chip-count">12</span></button>
       <button type="button" class="magazine-chip" data-magazine-target="mcfbd7faa8d47">AIニュース・セキュリティ<span class="magazine-chip-count">11</span></button>
       <button type="button" class="magazine-chip" data-magazine-target="me39434a23b8c">AIで作って売る（実践）<span class="magazine-chip-count">8</span></button>
@@ -735,7 +736,7 @@
 
   <div class="grid">
 
-    <a class="card reveal" href="https://note.com/mo0980/n/nbb33817187c1" target="_blank" rel="noopener noreferrer">
+    <a class="card reveal" href="https://note.com/mo0980/n/nbb33817187c1" target="_blank" rel="noopener noreferrer" data-magazine="mea086c047f4f">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/note_59_2026-09-12_nbb33817187c1.png" alt="Claude Codeで旅行ムービーを作らせたら半日で出来上がった話">
       <div class="card-body">
         <span class="card-date">2026-09-12</span>
@@ -1220,10 +1221,19 @@
   <div class="section-header">
     <h2 class="section-title">🧠 Brain 有料記事</h2>
     <div class="section-line"></div>
-    <span class="section-count">2 articles</span>
+    <span class="section-count">3 articles</span>
   </div>
 
   <div class="grid">
+
+    <a class="card reveal" href="https://brain-market.com/u/ma0980/a/b1gDN0YjMgoTZsNWa0JXY" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/brain_03_2026-09-07_b1gDN0YjMgoTZsNWa0JXY.png" alt="AIに記事を55本書かせる仕組みの全手順">
+      <div class="card-body">
+        <span class="card-date">2026-09-07</span>
+        <p class="card-title">【実測KPI公開】AIに記事を55本書かせる仕組みの全手順 ― 量産できたのに収益0円だった原因まで</p>
+        <span class="card-link card-link--paid">💎 有料（980円）・Brain で読む</span>
+      </div>
+    </a>
 
     <a class="card reveal" href="https://brain-market.com/u/ma0980/a/b4YjNyYjMgoTZsNWa0JXY" target="_blank" rel="noopener noreferrer">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/brain_01_2026-08-25_b4YjNyYjMgoTZsNWa0JXY.png" alt="Windows音声入力アプリ 導入＆実運用ガイド">
@@ -1409,23 +1419,41 @@
      role="tabpanel" aria-labelledby="tab-btn-videos">
 
 <!-- 動画（YouTube: masa0980 チャンネル。毎日19時に1本ずつ更新予定） -->
-<section class="section">
+<div class="video-view-switch" role="group" aria-label="動画の表示切替">
+  <button type="button" class="video-view-btn is-active" data-video-view="short">🩳 ショート</button>
+  <button type="button" class="video-view-btn" data-video-view="long">🎞 長尺</button>
+</div>
+
+<section class="section video-group" data-video-kind="short">
   <div class="section-header">
-    <h2 class="section-title">🎬 動画</h2>
+    <h2 class="section-title">🕹 Claude Codeでゲームを作ってみた</h2>
     <div class="section-line"></div>
-    <span class="section-count">8 videos</span>
+    <span class="section-count">1 video</span>
   </div>
 
   <div class="grid">
 
-    <a class="card reveal video-card" href="https://www.youtube.com/shorts/qqZIXDRW-M0" target="_blank" rel="noopener noreferrer">
-      <img class="card-thumb" loading="lazy" decoding="async" src="img/youtube_08_2026-09-10_qqZIXDRW-M0.jpg" alt="AI副業で3ヶ月、正直な結果を全部話します【7話まとめ】 サムネイル">
+    <a class="card reveal video-card" href="https://www.youtube.com/shorts/3irAU8yY-FE" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/youtube_09_2026-09-12_3irAU8yY-FE.jpg" alt="【実録】コードを一行も見ずに、会社員がゲームを作った話 サムネイル">
       <div class="card-body">
-        <span class="card-date">2026-09-10</span>
-        <p class="card-title">AI副業で3ヶ月、正直な結果を全部話します【7話まとめ】</p>
+        <span class="card-date">2026-09-12</span>
+        <p class="card-title">【実録】コードを一行も見ずに、会社員がゲームを作った話</p>
         <span class="card-link">YouTube で見る</span>
       </div>
     </a>
+
+  </div>
+</section>
+
+<section class="section video-group" data-video-kind="short">
+  <div class="section-header">
+    <h2 class="section-title">💼 AI副業</h2>
+    <div class="section-line"></div>
+    <span class="section-count">7 videos</span>
+  </div>
+
+  <div class="grid">
+
     <a class="card reveal video-card" href="https://www.youtube.com/shorts/SAzKW4PmOq0" target="_blank" rel="noopener noreferrer">
       <img class="card-thumb" loading="lazy" decoding="async" src="img/youtube_07_2026-09-09_SAzKW4PmOq0.jpg" alt="【AI副業 第7話 (完結)】7話やって分かった、続けるコツ サムネイル">
       <div class="card-body">
@@ -1488,6 +1516,27 @@
   </div>
 </section>
 
+<section class="section video-group" data-video-kind="long" hidden>
+  <div class="section-header">
+    <h2 class="section-title">🎞 総集編・長尺動画</h2>
+    <div class="section-line"></div>
+    <span class="section-count">1 video</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal video-card" href="https://www.youtube.com/watch?v=qqZIXDRW-M0" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/youtube_08_2026-09-10_qqZIXDRW-M0.jpg" alt="AI副業で3ヶ月、正直な結果を全部話します【7話まとめ】 サムネイル">
+      <div class="card-body">
+        <span class="card-date">2026-09-10</span>
+        <p class="card-title">AI副業で3ヶ月、正直な結果を全部話します【7話まとめ】</p>
+        <span class="card-link">YouTube で見る</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
 </div><!-- /tab-panel: videos -->
 
 <div class="tab-panel" data-tab="stamps" id="tab-panel-stamps" hidden
@@ -1498,7 +1547,7 @@
   <div class="section-header">
     <h2 class="section-title">🧸 LINEスタンプ</h2>
     <div class="section-line"></div>
-    <span class="section-count">10 stamps</span>
+    <span class="section-count">11 stamps</span>
   </div>
 
   <div class="grid">
@@ -1598,6 +1647,15 @@
       <div class="card-body">
         <span class="card-date">LINEアニメーションスタンプ</span>
         <p class="card-title">pretty_girl2026（動く版）</p>
+        <span class="card-link card-link--paid">🛒 購入する</span>
+      </div>
+    </a>
+
+    <a class="card reveal stamp-card" href="https://line.me/S/sticker/36514711" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/stamp_11_gentleman2026_move.png" alt="gentleman2026（動く版） LINEアニメーションスタンプ">
+      <div class="card-body">
+        <span class="card-date">LINEアニメーションスタンプ</span>
+        <p class="card-title">gentleman2026（動く版）</p>
         <span class="card-link card-link--paid">🛒 購入する</span>
       </div>
     </a>
@@ -1805,6 +1863,32 @@
     });
 
     apply();
+  })();
+
+  /**
+   * 動画の表示切替（ショート / 長尺）。シリーズ毎の <section> をまるごと
+   * 出し分けるだけなので、新しいシリーズを足すときは <section data-video-kind="short">
+   * を1つ追加すればよい（JS側の変更は不要）。
+   */
+  (function initVideoView() {
+    const panel = document.getElementById('tab-panel-videos');
+    if (!panel) return;
+
+    const viewBtns = panel.querySelectorAll('.video-view-btn[data-video-view]');
+    const groups = panel.querySelectorAll('.video-group[data-video-kind]');
+
+    function apply(kind) {
+      groups.forEach(function (g) { g.hidden = g.dataset.videoKind !== kind; });
+    }
+
+    viewBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        viewBtns.forEach(function (b) { b.classList.toggle('is-active', b === btn); });
+        apply(btn.dataset.videoView);
+      });
+    });
+
+    apply('short');
   })();
 
   /**
