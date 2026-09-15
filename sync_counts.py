@@ -62,6 +62,16 @@ def navcount_re(kind: str) -> re.Pattern:
     return re.compile(r'(<span class="nav-count" data-sync="%s">)\d+(</span>)' % kind)
 
 
+# 「マガジン別」表示のチップ件数。カードの data-magazine（スペース区切りで複数可）に
+# そのマガジン key を含む記事カードの数で揃える。チップ件数を手書きしていたため、
+# マガジン追加のたびに古い数字が残っていた（2026-09-15 に同期対象へ追加）。
+MAGAZINE_CHIP_RE = re.compile(
+    r'(<button type="button" class="magazine-chip" data-magazine-target="(m[0-9a-f]+)">[^<]*'
+    r'<span class="magazine-chip-count">)\d+(</span>)'
+)
+CARD_MAGAZINE_RE = re.compile(r'<a class="card reveal"[^>]*data-magazine="([^"]*)"')
+
+
 def main():
     if not TARGET.exists():
         sys.stderr.write(f"ERROR: {TARGET} が見つかりません\n")
@@ -131,6 +141,29 @@ def main():
         sync_total(navcount_re(kind), f"nav-count[{kind}]", totals[kind])
     for name, n in media.items():
         sync_total(navcount_re(f"media-{name}"), f"nav-count[media-{name}]", n)
+
+    # マガジン別チップの件数
+    mag_counts: dict = {}
+    for attr in CARD_MAGAZINE_RE.findall(html):
+        for key in attr.split():
+            mag_counts[key] = mag_counts.get(key, 0) + 1
+
+    def fix_chip(m):
+        key = m.group(2)
+        n = mag_counts.get(key, 0)
+        old = m.group(0)
+        new = f"{m.group(1)}{n}{m.group(3)}"
+        if old != new:
+            changes.append(f"magazine-chip[{key}]: {old[-30:]} -> {n}")
+        if n == 0:
+            sys.stderr.write(f"WARN: マガジン {key} のチップがあるが、data-magazine にこの key を持つカードが0件\n")
+        return new
+
+    new_html, n_chips = MAGAZINE_CHIP_RE.subn(fix_chip, new_html)
+    chip_keys = {m[1] for m in MAGAZINE_CHIP_RE.findall(html)}
+    for key in mag_counts:
+        if key not in chip_keys:
+            sys.stderr.write(f"WARN: カードに data-magazine=\"{key}\" があるが、対応するチップが無い（チップを追加すること）\n")
 
     if missing:
         sys.stderr.write(
