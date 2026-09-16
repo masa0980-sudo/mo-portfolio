@@ -389,6 +389,13 @@
       object-position: center;
       background: #fff;
     }
+    /* 本カード: Kindle表紙は縦長（5:8）なので専用の縦長アスペクト比にする */
+    .book-card .card-thumb {
+      aspect-ratio: 5/8;
+      object-fit: cover;
+      object-position: top;
+      background: #0f1c3f;
+    }
     .stamp-card-wrap {
       position: relative;
     }
@@ -659,6 +666,14 @@
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>
       <span class="nav-btn-label">動画</span>
       <span class="nav-count" data-sync="videos">10</span>
+    </button>
+
+    <button type="button" class="nav-btn tab-btn" id="tab-btn-books"
+            role="tab" aria-selected="false" aria-controls="tab-panel-books"
+            data-tab-target="books">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      <span class="nav-btn-label">本</span>
+      <span class="nav-count" data-sync="books">1</span>
     </button>
 
     <button type="button" class="nav-btn tab-btn" id="tab-btn-board"
@@ -1410,6 +1425,33 @@
 </section>
 
 </div><!-- /tab-panel: games -->
+
+<div class="tab-panel" data-tab="books" id="tab-panel-books" hidden
+     role="tabpanel" aria-labelledby="tab-btn-books">
+
+<!-- 本（Kindle） -->
+<section class="section">
+  <div class="section-header">
+    <h2 class="section-title">📖 本</h2>
+    <div class="section-line"></div>
+    <span class="section-count">1 book</span>
+  </div>
+
+  <div class="grid">
+
+    <a class="card reveal book-card" href="https://www.amazon.co.jp/dp/B0HK158DNB" target="_blank" rel="noopener noreferrer">
+      <img class="card-thumb" loading="lazy" decoding="async" src="img/book_00_2026-09-16_claude-code-beginner.jpg" alt="Claude Code 初心者入門 表紙">
+      <div class="card-body">
+        <span class="card-date">2026-09-16・Kindle（電子書籍）・¥500</span>
+        <p class="card-title">Claude Code 初心者入門</p>
+        <span class="card-link">📖 Amazonで見る</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+</div><!-- /tab-panel: books -->
 
 <div class="tab-panel" data-tab="board" id="tab-panel-board" hidden
      role="tabpanel" aria-labelledby="tab-btn-board">

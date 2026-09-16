@@ -29,6 +29,7 @@ CARD_RE = re.compile(r'<a class="card reveal"')
 GAME_CARD_RE = re.compile(r'<a class="card reveal game-card"')
 STAMP_CARD_RE = re.compile(r'<a class="card reveal stamp-card"')
 VIDEO_CARD_RE = re.compile(r'<a class="card reveal video-card"')
+BOOK_CARD_RE = re.compile(r'<a class="card reveal book-card"')
 
 # 種類ごとの (カードの正規表現, 単数形, 複数形)。
 # section-count の単位と data-sync のキーを、この1箇所から決めている。
@@ -37,6 +38,7 @@ KINDS = {
     "games": (GAME_CARD_RE, "game", "games"),
     "stamps": (STAMP_CARD_RE, "stamp", "stamps"),
     "videos": (VIDEO_CARD_RE, "video", "videos"),
+    "books": (BOOK_CARD_RE, "book", "books"),
 }
 
 # 記事タブの中の媒体別パネル。パネル同士は兄弟要素なので、開始タグで区切って
@@ -47,7 +49,7 @@ SUBTAB_RE = re.compile(r'<div class="subtab-panel" data-subtab="([a-z]+)"')
 
 SECTION_RE = re.compile(r'<section class="section[^"]*">.*?</section>', re.DOTALL)
 SECTION_COUNT_RE = re.compile(
-    r'<span class="section-count">\d+ (?:articles?|games?|stamps?|videos?)</span>'
+    r'<span class="section-count">\d+ (?:articles?|games?|stamps?|videos?|books?)</span>'
 )
 
 DESC_RE = re.compile(r'(公開した)\d+(本のAI学習記事)')
