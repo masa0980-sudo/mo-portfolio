@@ -47,7 +47,10 @@ KINDS = {
 #   game-card / stamp-card が付いていて CARD_RE に当たらないので混ざらない）
 SUBTAB_RE = re.compile(r'<div class="subtab-panel" data-subtab="([a-z]+)"')
 
-SECTION_RE = re.compile(r'<section class="section[^"]*">.*?</section>', re.DOTALL)
+# class の後ろに他の属性が続く <section class="section video-group" data-video-kind="short">
+# にも当てるため [^>]* を挟む。以前は class 属性で閉じる形しか想定しておらず、動画の
+# グループ別 section-count が一度も同期されていなかった（2026-09-19 に発覚）。
+SECTION_RE = re.compile(r'<section class="section[^"]*"[^>]*>.*?</section>', re.DOTALL)
 SECTION_COUNT_RE = re.compile(
     r'<span class="section-count">\d+ (?:articles?|games?|stamps?|videos?|books?)</span>'
 )
